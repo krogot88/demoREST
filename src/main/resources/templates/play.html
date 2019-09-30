@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+ 	
+ <script src="jQuery341.js"></script>
+ <style>
+   .btn {
+    display: inline-block; /* Строчно-блочный элемент */
+    background: #8C959D; /* Серый цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 3px; /* Скругляем уголки */ 
+   }
+   .btnRed {
+    display: inline-block; /* Строчно-блочный элемент */
+    background: #ffcccc; /* Серый цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 3px; /* Скругляем уголки */ 
+   }
+   .centerblock {
+   	position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+   }
+   .centerblock1 {
+   position: absolute;
+   top: 200%;
+   left: 50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%)
+   
+   }   
+   H1 { text-align: center }
+   H2 { text-align: center }
+   
+  </style>
+  <script type="text/javascript">
+	function myFunction() {    
+    $.ajax({
+        url : '/getword',
+        datatype : 'json',
+        type : "get",
+        contentType : "application/json",       
+        success : function(data) {
+        	$('.greeting-id').append(data.name);
+            $('.greeting-content').append(data.translate);
+        }
+    });
+}
+	function myFunction2() {    
+	    $.ajax({
+	        url : '/saveword',
+	        datatype : 'json',
+	        type : "get",
+	        contentType : "application/json",       
+	        success : function(data) {
+	        	$('.greeting-id').append(data.name);
+	            $('.greeting-content').append(data.translate);
+	        }
+	    });
+	}
+</script>
+</head>
+<body>
+
+<h1>English words </h1>
+<h2 class="greeting-id">Word: </h2>
+<h2 class="greeting-content">Rus:  </h2>
+<div class="centerblock">
+	<a href="#" class="btn" onClick="myFunction();">know</a>
+	<a href="#" class="btn" onClick="myFunction2();">don't know</a>
+	<div class="centerblock1">
+		<a href="/" class="btnRed">stop</a>
+	</div>
+</div>
+
+</body>
+</html>
