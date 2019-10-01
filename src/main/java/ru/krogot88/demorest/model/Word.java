@@ -25,18 +25,24 @@ public class Word {
         super();
     }
 
-
     public Word(String name, String translate) {
         super();
         this.name = name;
         this.translate = translate;
     }
 
+    @Override
+    public String toString() {
+        return "Word{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", translate='" + translate + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
@@ -47,11 +53,9 @@ public class Word {
         return name;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getTranslate() {
         return translate;
@@ -59,7 +63,4 @@ public class Word {
     public void setTranslate(String translate) {
         this.translate = translate;
     }
-
-
-
 }

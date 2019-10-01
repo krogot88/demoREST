@@ -32,7 +32,6 @@ public class RESTController {
     @RequestMapping("/saveword")
     public Word saveWord() {
         System.out.println("in getWord() REST");
-
         Word save = new Word("moon", "луна");
         Word result = null;
         result = wordRepository.save(save);
