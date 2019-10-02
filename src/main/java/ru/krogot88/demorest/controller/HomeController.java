@@ -31,8 +31,8 @@ public class HomeController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getListPage(Model model) {
-        Iterable<Word> iterable = wordRepository.findAll();
-        model.addAttribute("wordList",iterable);
+        List<Word> list = wordRepository.findAll();
+        model.addAttribute("wordList",list);
         return "list";
     }
 }
