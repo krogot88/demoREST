@@ -37,5 +37,4 @@ public class RESTController {
         result = wordRepository.save(save);
         return result;
     }
-
 }
