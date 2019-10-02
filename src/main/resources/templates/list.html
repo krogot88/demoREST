@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>English words </h1>
+<div class="centerblock2">
+    <table >
+        <tr th:each="word:${wordList}">
+            <td th:utext="${word.name}"></td>
+            <td th:utext="${word.translate}"></td>
+        </tr>
+    </table>
+</div>
+<div class="centerblock">
+    <a href="/" class="btn2">main</a>
+</div>
+</body>
+</html>

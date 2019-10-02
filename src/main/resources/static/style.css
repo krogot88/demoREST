@@ -42,7 +42,31 @@
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
-
 }
+
+.centerblock2 {
+    display: inline-block;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+
+table {
+    border: solid 2px blue;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+    padding: 10px;
+    border: solid 2px blue;
+}
+td {
+    padding: 10px;
+    border: 2px solid blue;
+}
+
 H1 { text-align: center }
 H2 { text-align: center }
