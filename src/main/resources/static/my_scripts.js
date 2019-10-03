@@ -1,4 +1,6 @@
 function myFunction() {
+    document.getElementById("translate").hidden = true;
+
     $.ajax({
         url : '/getword',
         datatype : 'json',
@@ -21,4 +23,8 @@ function myFunction2() {
             $('.greeting-content').append(data.translate);
         }
     });
+}
+
+function setVisible() {
+    document.getElementById("translate").hidden = false;
 }
