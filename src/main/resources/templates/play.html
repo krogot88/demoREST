@@ -1,23 +1,46 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
- <script src="jQuery341.js"></script>
- <script src="my_scripts.js"></script>
- <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jQuery341.js"></script>
+    <script src="my_scripts.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<h1>English words </h1>
-<div class="centerblock2">
-    <h2 class="greeting-id">Word: </h2>
-    <h2 class="greeting-content">Rus:  </h2>
-</div>
-<div class="centerblock">
-	<a href="#" class="btn2" onClick="myFunction();">know</a>
-	<a href="#" class="btn2" onClick="myFunction2();">don't know</a>
-	<div class="centerblock1">
-		<a href="/" class="btnRed">main</a>
-	</div>
+<div class="page">
+    <div class="header"></div>
+    <div>
+        <div class="left-side">
+            <div class="widget">
+                <h3 class="widget-title">Категории</h3>
+                <ul class="widget-list">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="">Игра</a></li>
+                    <li><a href="/list">Словарь</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <div>
+                <table class="play">
+                    <tr>
+                        <td><h2>Word: </h2></td>
+                        <td><h2>Rus:  </h2></td>
+                    </tr>
+                    <tr>
+                        <td><h2 class="greeting-id"></h2></td>
+                        <td><h2 class="greeting-content" id="translate" hidden="true"></h2></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="knopka" onClick="myFunction();">следующее слово</a></td>
+                        <td><a href="#" class="knopka" onClick="setVisible();">показать перевод</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
 </div>
 
 </body>

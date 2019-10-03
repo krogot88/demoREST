@@ -1,72 +1,103 @@
-.btn {
-    display: inline-block; /* Строчно-блочный элемент */
-    background: #8C959D; /* Серый цвет фона */
-    color: #fff; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    border-radius: 3px; /* Скругляем уголки */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+.page {
+    margin: 0 auto;
+    width: 960px;
+}
+.header {
+    background: grey;
+    height: 100px;
+}
+.left-side {
+    width: 200px;
+    float: left;
+    height: 650px;
+    background: white;
+}
+.content {
+    width: 760px;
+    float: right;
+    height: 650px;
+    background: lightgray;
+}
+.footer {
+    clear: both;
+    background: grey;
+    height: 50px;
 }
 
+.widget {
+    padding: 20px 30px;
+    background: white;
+    font-family: 'Roboto', sans-serif;
+}
+.widget-title {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #222;
+    font-size: 16px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border-left: 2px solid #b99d61;
+}
+.widget-list {
+    padding: 0;
+    list-style: none;
+}
+.widget-list a:before {
+    content: "\2014";
+    margin-right: 14px;
+}
+.widget-list a {
+    text-decoration: none;
+    outline: none;
+    display: block;
+    padding: 6px 0;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: #444;
+    transition: .3s linear;
+}
+.widget-list a:hover {color: #b99d61;}
 
-.btn2 {
-    display: inline-block; /* Строчно-блочный элемент */
-    background: #8C959D; /* Серый цвет фона */
-    color: #fff; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    border-radius: 3px; /* Скругляем уголки */
-}
-.btnRed {
-    display: inline-block; /* Строчно-блочный элемент */
-    background: #ffcccc; /* Серый цвет фона */
-    color: #fff; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    border-radius: 3px; /* Скругляем уголки */
-}
-.centerblock {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-}
-.centerblock1 {
-    position: absolute;
-    top: 200%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-}
-
-.centerblock2 {
-    display: inline-block;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-}
-
-
-table {
+table.list {
     border: solid 2px blue;
     border-collapse: collapse;
+    margin: auto;
+    margin-top: 30px;
 }
-th {
-    text-align: left;
+table.list tr {
+    text-align: center;
     padding: 10px;
     border: solid 2px blue;
 }
-td {
+table.list td {
     padding: 10px;
     border: 2px solid blue;
 }
+
+table.play {
+    margin: auto;
+    margin-top: 30px;
+}
+table.play tr {
+    text-align: center;
+    padding: 10px;
+}
+table.play td {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+}
+
+a.knopka {
+    color: #fff; /* цвет текста */
+    text-decoration: none; /* убирать подчёркивание у ссылок */
+    user-select: none; /* убирать выделение текста */
+    background: rgb(212,75,56); /* фон кнопки */
+    padding: .7em 1.5em; /* отступ от текста */
+    outline: none; /* убирать контур в Mozilla */
+}
+a.knopka:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+a.knopka:active { background: rgb(152,15,0); } /* при нажатии */
 
 H1 { text-align: center }
 H2 { text-align: center }

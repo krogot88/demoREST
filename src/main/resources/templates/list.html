@@ -1,21 +1,40 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="page">
+    <div class="header"></div>
+    <div>
 
-<h1>English words </h1>
-<div class="centerblock2">
-    <table >
-        <tr th:each="word:${wordList}">
-            <td th:utext="${word.name}"></td>
-            <td th:utext="${word.translate}"></td>
-        </tr>
-    </table>
+        <div class="left-side">
+            <div class="widget">
+                <h3 class="widget-title">Категории</h3>
+                <ul class="widget-list">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/play">Игра</a></li>
+                    <li><a href="">Словарь</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <div>
+                <table class="list">
+                    <tr th:each="word:${wordList}">
+                        <td th:utext="${word.name}"></td>
+                        <td th:utext="${word.translate}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer"></div>
 </div>
-<div class="centerblock">
-    <a href="/" class="btn2">main</a>
-</div>
+
 </body>
 </html>
