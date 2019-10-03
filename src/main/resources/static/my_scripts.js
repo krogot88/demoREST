@@ -5,8 +5,8 @@ function myFunction() {
         type : "get",
         contentType : "application/json",
         success : function(data) {
-            $('.greeting-id').append(data.name);
-            $('.greeting-content').append(data.translate);
+            $('.greeting-id').text(data.name);
+            $('.greeting-content').text(data.translate);
         }
     });
 }

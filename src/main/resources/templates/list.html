@@ -9,6 +9,7 @@
 <div class="page">
     <div class="header"></div>
     <div>
+
         <div class="left-side">
             <div class="widget">
                 <h3 class="widget-title">Категории</h3>
@@ -19,14 +20,18 @@
                 </ul>
             </div>
         </div>
+
         <div class="content">
-            <table >
-                <tr th:each="word:${wordList}">
-                    <td th:utext="${word.name}"></td>
-                    <td th:utext="${word.translate}"></td>
-                </tr>
-            </table>
+            <div>
+                <table class="list">
+                    <tr th:each="word:${wordList}">
+                        <td th:utext="${word.name}"></td>
+                        <td th:utext="${word.translate}"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
+
     </div>
     <div class="footer"></div>
 </div>
