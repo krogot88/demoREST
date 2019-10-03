@@ -1,23 +1,99 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
- <script src="jQuery341.js"></script>
- <script src="my_scripts.js"></script>
- <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jQuery341.js"></script>
+    <script src="my_scripts.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page {
+            margin: 0 auto;
+            width: 960px;
+        }
+        .header {
+            background: grey;
+            height: 100px;
+        }
+        .left-side {
+            width: 200px;
+            float: left;
+            height: 650px;
+            background: white;
+        }
+        .content {
+            width: 760px;
+            float: right;
+            height: 650px;
+            background: lightgray;
+        }
+        .footer {
+            clear: both;
+            background: grey;
+            height: 50px;
+        }
+
+        .widget {
+            padding: 20px 30px;
+            background: white;
+            font-family: 'Roboto', sans-serif;
+        }
+        .widget-title {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #222;
+            font-size: 16px;
+            padding-left: 15px;
+            margin-bottom: 15px;
+            border-left: 2px solid #b99d61;
+        }
+        .widget-list {
+            padding: 0;
+            list-style: none;
+        }
+        .widget-list a:before {
+            content: "\2014";
+            margin-right: 14px;
+        }
+        .widget-list a {
+            text-decoration: none;
+            outline: none;
+            display: block;
+            padding: 6px 0;
+            letter-spacing: 1px;
+            font-weight: 300;
+            color: #444;
+            transition: .3s linear;
+        }
+        .widget-list a:hover {color: #b99d61;}
+    </style>
 </head>
 <body>
-
-<h1>English words </h1>
-<div class="centerblock2">
-    <h2 class="greeting-id">Word: </h2>
-    <h2 class="greeting-content">Rus:  </h2>
-</div>
-<div class="centerblock">
-	<a href="#" class="btn2" onClick="myFunction();">know</a>
-	<a href="#" class="btn2" onClick="myFunction2();">don't know</a>
-	<div class="centerblock1">
-		<a href="/" class="btnRed">main</a>
-	</div>
+<div class="page">
+    <div class="header"></div>
+    <div>
+        <div class="left-side">
+            <div class="widget">
+                <h3 class="widget-title">Категории</h3>
+                <ul class="widget-list">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="">Игра</a></li>
+                    <li><a href="/list">Словарь</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <div>
+                <h2 class="greeting-id">Word: </h2>
+                <h2 class="greeting-content">Rus:  </h2>
+            </div>
+            <div>
+                <a href="#" class="btn2" onClick="myFunction();">know</a>
+                <a href="#" class="btn2" onClick="myFunction2();">don't know</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
 </div>
 
 </body>
