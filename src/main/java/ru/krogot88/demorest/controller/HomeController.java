@@ -29,6 +29,11 @@ public class HomeController {
         return "play";
     }
 
+    @RequestMapping(value = "/loadnew", method = RequestMethod.GET)
+    public String getLoadNewPage() {
+        return "loadnew";
+    }
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getListPage(Model model) {
         List<Word> list = wordRepository.findAll();

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.krogot88.demorest.dao.WordRepository;
@@ -28,10 +29,12 @@ public class RESTController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @RequestMapping("/saveword")
-    public Word saveWord() {
-        Word save = new Word("moon", "луна");
-
-        return save;
+    @RequestMapping("/postword")
+    public ResponseEntity<Word> saveWord(@RequestBody Word word) {
+        Word result = null;
+        System.out.println(word);
+        //result = serviceWord.saveNewWord(word);
+        result = word;
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }

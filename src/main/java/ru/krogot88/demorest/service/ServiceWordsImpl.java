@@ -20,4 +20,10 @@ public class ServiceWordsImpl implements ServiceWord {
         result = wordRepository.findNextWord();
         return result;
     }
+
+    @Override
+    public Word saveNewWord(Word word) {
+        Word toSave = word;
+        return wordRepository.save(toSave);
+    }
 }

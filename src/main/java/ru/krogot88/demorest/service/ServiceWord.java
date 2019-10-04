@@ -7,4 +7,6 @@ import ru.krogot88.demorest.model.Word;
  */
 public interface ServiceWord {
     Word getNextWord();
+
+    Word saveNewWord(Word word);
 }

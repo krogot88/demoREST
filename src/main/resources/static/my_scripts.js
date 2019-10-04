@@ -12,15 +12,26 @@ function myFunction() {
         }
     });
 }
-function myFunction2() {
+
+function sendWord() {
     $.ajax({
-        url : '/saveword',
+        url : '/postword',
+        type : "post",
         datatype : 'json',
-        type : "get",
-        contentType : "application/json",
+        contentType : "application/json; charset=utf-8",
+        data : JSON.stringify({
+            "id" : null,
+            "name" : $('#text1').val(),
+            "translate" : $('#text2').val()
+        }),
         success : function(data) {
-            $('.greeting-id').append(data.name);
-            $('.greeting-content').append(data.translate);
+            document.getElementById("text1").value = "";
+            document.getElementById("text2").value = "";
+        },
+        statusCode: {
+            201: function(responseObject, textStatus, jqXHR) {
+                $('.response_status').text("saved");
+            },
         }
     });
 }
