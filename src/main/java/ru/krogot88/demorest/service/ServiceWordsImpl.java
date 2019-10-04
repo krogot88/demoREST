@@ -1,6 +1,8 @@
 package ru.krogot88.demorest.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.model.Word;
 
 /**
@@ -8,8 +10,14 @@ import ru.krogot88.demorest.model.Word;
  */
 @Service
 public class ServiceWordsImpl implements ServiceWord {
+
+    @Autowired
+    private WordRepository wordRepository;
+
     @Override
-    public Word getWord() {
-        return new Word("home","дом");
+    public Word getNextWord() {
+        Word result = null;
+        result = wordRepository.findNextWord();
+        return result;
     }
 }
