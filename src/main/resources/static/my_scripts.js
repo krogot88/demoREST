@@ -39,3 +39,19 @@ function sendWord() {
 function setVisible() {
     document.getElementById("translate").hidden = false;
 }
+
+window.onload = function () {
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            var iptext = document.querySelector('.ip_address');
+            if (iptext!== null) {
+                iptext.innerHTML = request.responseText;
+            }
+        }
+    }
+
+    request.open('GET','/getip');
+    request.send();
+}
