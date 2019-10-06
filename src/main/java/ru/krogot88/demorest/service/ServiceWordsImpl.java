@@ -26,4 +26,9 @@ public class ServiceWordsImpl implements ServiceWord {
         Word toSave = word;
         return wordRepository.save(toSave);
     }
+
+    @Override
+    public Word getWordById(long id) {
+        return wordRepository.findById(id).orElse(null);
+    }
 }

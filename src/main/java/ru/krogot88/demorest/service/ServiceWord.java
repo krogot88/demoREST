@@ -9,4 +9,6 @@ public interface ServiceWord {
     Word getNextWord();
 
     Word saveNewWord(Word word);
+
+    Word getWordById(long id);
 }
