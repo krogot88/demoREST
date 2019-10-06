@@ -30,7 +30,11 @@ function sendWord() {
         },
         statusCode: {
             201: function(responseObject, textStatus, jqXHR) {
-                $('.response_status').text("saved");
+                var h2text = document.querySelector('.response_status');
+                h2text.textContent = 'saved';
+                setTimeout(function () {
+                    h2text.style.opacity = '0';
+                }, 2000);
             },
         }
     });
