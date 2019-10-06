@@ -15,7 +15,7 @@ function myFunction() {
 
 function sendWord() {
     $.ajax({
-        url : '/postword',
+        url : '/word',
         type : "post",
         datatype : 'json',
         contentType : "application/json; charset=utf-8",
@@ -32,6 +32,7 @@ function sendWord() {
             201: function(responseObject, textStatus, jqXHR) {
                 var h2text = document.querySelector('.response_status');
                 h2text.textContent = 'saved';
+                h2text.style.opacity = '1';
                 setTimeout(function () {
                     h2text.style.opacity = '0';
                 }, 2000);

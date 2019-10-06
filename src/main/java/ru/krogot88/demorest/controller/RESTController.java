@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.model.Word;
@@ -29,7 +30,7 @@ public class RESTController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @RequestMapping("/postword")
+    @RequestMapping(value = "/word", method = RequestMethod.POST)
     public ResponseEntity<Word> saveWord(@RequestBody Word word) {
         Word result = null;
         System.out.println(word);
@@ -37,4 +38,6 @@ public class RESTController {
         result = word;
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
+
+
 }

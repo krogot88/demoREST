@@ -109,8 +109,8 @@ a.knopka:active { background: rgb(152,15,0); } /* при нажатии */
 
 
 .response_status {
-    opacity: 1;
-    transition: opacity 2s;
+    opacity: 0;
+    transition: opacity 1s;
 }
 
 
