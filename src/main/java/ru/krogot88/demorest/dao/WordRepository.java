@@ -12,6 +12,8 @@ import java.util.List;
 public interface WordRepository extends CrudRepository<Word,Long> {
     List<Word> findAll();
 
+    Word findByName(String name);
+
     @Query(value = "SELECT * FROM words ORDER BY RANDOM() limit 1", nativeQuery = true )
     Word findNextWord();
 }

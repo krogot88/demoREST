@@ -37,6 +37,14 @@ function sendWord() {
                     h2text.style.opacity = '0';
                 }, 2000);
             },
+            409: function(responseObject, textStatus, jqXHR) {
+                var h2text = document.querySelector('.response_status');
+                h2text.textContent = 'already exist';
+                h2text.style.opacity = '1';
+                setTimeout(function () {
+                    h2text.style.opacity = '0';
+                }, 2000);
+            },
         }
     });
 }

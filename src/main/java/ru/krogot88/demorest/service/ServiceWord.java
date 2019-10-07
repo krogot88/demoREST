@@ -10,5 +10,15 @@ public interface ServiceWord {
 
     Word saveNewWord(Word word);
 
+    Word getWord(String idOrName);
+
     Word getWordById(long id);
+
+    Word getWordByName(String name);
+
+    Word putWord(Word word);
+
+    Word putWordOrUpdate(Word word);
+
+    boolean deleteWord(String idOrName);
 }
