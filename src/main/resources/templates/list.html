@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </head>
 <body>
 <div class="page">
@@ -23,13 +23,32 @@
         </div>
 
         <div class="content">
-            <div>
-                <table class="list">
-                    <tr th:each="word:${wordList}">
-                        <td th:utext="${word.name}"></td>
-                        <td th:utext="${word.translate}"></td>
-                    </tr>
-                </table>
+            <div th:fragment="article-list" th:if="${wordList != null && !wordList.isEmpty()}">
+                    <table style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>word</th>
+                            <th>translate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="article : ${wordList}">
+                            <td th:text="${{article.id}}">...</td>
+                            <td th:text="${{article.name}}">...</td>
+                            <td th:text="${{article.translate}}">...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div th:fragment="pagination">
+                    <nav aria-label="Pagination">
+                        <ul >
+                            <li  th:each="pageNumber : ${pageNumbers}" >
+                                <a  th:href="@{|/list/${pageNumber}|}" th:text=${pageNumber}>1</a>
+                            </li>
+                        </ul>
+                    </nav>
             </div>
         </div>
 

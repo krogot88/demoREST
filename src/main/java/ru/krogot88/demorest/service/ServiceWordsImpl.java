@@ -128,7 +128,7 @@ public class ServiceWordsImpl implements ServiceWord {
     }
 
     @Override
-    public Page<Word> getPaginatedArticles(Pageable pageable) {
+    public Page<Word> getPaginatedWords(Pageable pageable) {
         return wordRepository.findAll(pageable);
     }
 }

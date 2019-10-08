@@ -24,5 +24,5 @@ public interface ServiceWord {
 
     boolean deleteWord(String idOrName);
 
-    Page<Word> getPaginatedArticles(Pageable pageable);
+    Page<Word> getPaginatedWords(Pageable pageable);
 }

@@ -3,9 +3,7 @@ package ru.krogot88.demorest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,9 +20,6 @@ import java.util.stream.IntStream;
 
 @Controller
 public class HomeController {
-
-    @Autowired
-    private WordRepository wordRepository;
 
     @Autowired
     private ServiceWord serviceWord;
@@ -44,25 +39,24 @@ public class HomeController {
         return "loadnew";
     }
 
+    //  permanent 301 redirect to "list/1"
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String getListPage(Model model) {
-        List<Word> list = wordRepository.findAll();
-        model.addAttribute("wordList",list);
-        return "list";
+    public String getListPage() {
+        return "redirect:list/1";
     }
 
-    @RequestMapping(value = "/article-list/page/{page}")
-    public ModelAndView listArticlesPageByPage(@PathVariable("page") int page) {
-        ModelAndView modelAndView = new ModelAndView("article-list-paging");
-        PageRequest pageable = PageRequest.of(page - 1, 15);
-        Page<Word> articlePage = serviceWord.getPaginatedArticles(pageable);
-        int totalPages = articlePage.getTotalPages();
+    @RequestMapping(value = "/list/{page}")
+    public ModelAndView listWordsPageByPage(@PathVariable("page") int page) {
+        ModelAndView modelAndView = new ModelAndView("list");
+        PageRequest pageable = PageRequest.of(page - 1, 3);
+        Page<Word> wordPage = serviceWord.getPaginatedWords(pageable);
+        int totalPages = wordPage.getTotalPages();
         if(totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1,totalPages).boxed().collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
-        modelAndView.addObject("activeArticleList", true);
-        modelAndView.addObject("articleList", articlePage.getContent());
+        modelAndView.addObject("activeArticleList", true); // maybe it is not used
+        modelAndView.addObject("wordList", wordPage.getContent());
         return modelAndView;
     }
 
