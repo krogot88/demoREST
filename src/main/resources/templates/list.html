@@ -23,32 +23,32 @@
         </div>
 
         <div class="content">
-            <div th:fragment="article-list" th:if="${wordList != null && !wordList.isEmpty()}">
-                    <table style="width:100%">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>word</th>
-                            <th>translate</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="article : ${wordList}">
-                            <td th:text="${{article.id}}">...</td>
-                            <td th:text="${{article.name}}">...</td>
-                            <td th:text="${{article.translate}}">...</td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="table_div" th:fragment="word-list" th:if="${wordList != null && !wordList.isEmpty()}">
+                <table style="width:100%">
+                    <thead>
+                    <tr>
+                        <th class="firstTh">ID</th>
+                        <th>word</th>
+                        <th>translate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="word : ${wordList}">
+                        <td class="firstTh" th:text="${{word.id}}">...</td>
+                        <td th:text="${{word.name}}">...</td>
+                        <td th:text="${{word.translate}}">...</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div th:fragment="pagination">
-                    <nav aria-label="Pagination">
-                        <ul >
-                            <li  th:each="pageNumber : ${pageNumbers}" >
-                                <a  th:href="@{|/list/${pageNumber}|}" th:text=${pageNumber}>1</a>
-                            </li>
-                        </ul>
-                    </nav>
+            <div style="text-align: center" th:fragment="pagination">
+                <div class="pagination">
+                    <th:block th:each="pageNumber : ${pageNumbers}">
+                        <a th:href="@{|/list/${pageNumber}|}"
+                           th:classappend="${activePage == pageNumber} ? active : notactive "
+                           th:text=${pageNumber}>1</a>
+                    </th:block>
+                </div>
             </div>
         </div>
 

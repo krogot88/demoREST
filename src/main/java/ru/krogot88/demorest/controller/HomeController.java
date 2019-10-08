@@ -48,7 +48,7 @@ public class HomeController {
     @RequestMapping(value = "/list/{page}")
     public ModelAndView listWordsPageByPage(@PathVariable("page") int page) {
         ModelAndView modelAndView = new ModelAndView("list");
-        PageRequest pageable = PageRequest.of(page - 1, 3);
+        PageRequest pageable = PageRequest.of(page - 1, 25);
         Page<Word> wordPage = serviceWord.getPaginatedWords(pageable);
         int totalPages = wordPage.getTotalPages();
         if(totalPages > 0) {
@@ -57,6 +57,7 @@ public class HomeController {
         }
         modelAndView.addObject("activeArticleList", true); // maybe it is not used
         modelAndView.addObject("wordList", wordPage.getContent());
+        modelAndView.addObject("activePage", page);
         return modelAndView;
     }
 

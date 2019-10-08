@@ -94,6 +94,7 @@ table.play td {
     padding: 10px;
 }
 
+
 a.knopka {
     color: #fff; /* цвет текста */
     text-decoration: none; /* убирать подчёркивание у ссылок */
@@ -102,6 +103,38 @@ a.knopka {
     padding: .7em 1.5em; /* отступ от текста */
     outline: none; /* убирать контур в Mozilla */
 }
+
+
+.table_div {
+    margin: 20px;
+    height: 570px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+}
+.table_div th, td {
+    width: 340px;
+    text-align: left;
+    padding-left: 15px;
+}
+.table_div .firstTh {
+    width: 50px;
+}
+
+
+.pagination {
+    display: inline-block;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.pagination a.active {
+    background-color: rgb(212,75,56);
+    color: white;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
 
 
 a.knopka:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
