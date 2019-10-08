@@ -1,5 +1,7 @@
 package ru.krogot88.demorest.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import ru.krogot88.demorest.model.Word;
 
 /**
@@ -21,4 +23,6 @@ public interface ServiceWord {
     Word putWordOrUpdate(Word word);
 
     boolean deleteWord(String idOrName);
+
+    Page<Word> getPaginatedArticles(Pageable pageable);
 }

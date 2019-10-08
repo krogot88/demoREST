@@ -6,6 +6,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.model.Word;
@@ -123,5 +125,10 @@ public class ServiceWordsImpl implements ServiceWord {
                 return true;
             }
         }
+    }
+
+    @Override
+    public Page<Word> getPaginatedArticles(Pageable pageable) {
+        return wordRepository.findAll(pageable);
     }
 }

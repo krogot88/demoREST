@@ -1,5 +1,7 @@
 package ru.krogot88.demorest.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.krogot88.demorest.model.Word;
@@ -16,4 +18,6 @@ public interface WordRepository extends CrudRepository<Word,Long> {
 
     @Query(value = "SELECT * FROM words ORDER BY RANDOM() limit 1", nativeQuery = true )
     Word findNextWord();
+
+    Page<Word> findAll(Pageable pageable);
 }
