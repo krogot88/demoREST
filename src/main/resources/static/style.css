@@ -24,6 +24,8 @@
     height: 50px;
 }
 
+
+
 .widget {
     padding: 20px 30px;
     background: white;
@@ -58,6 +60,16 @@
 }
 .widget-list a:hover {color: #b99d61;}
 
+.api_list {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px;
+    letter-spacing: 1px;
+
+}
+.api_list p {
+    font-size: 13px;
+}
+
 table.list {
     border: solid 2px blue;
     border-collapse: collapse;
@@ -74,6 +86,8 @@ table.list td {
     border: 2px solid blue;
 }
 
+
+
 table.play {
     margin: auto;
     margin-top: 30px;
@@ -88,6 +102,7 @@ table.play td {
     padding: 10px;
 }
 
+
 a.knopka {
     color: #fff; /* цвет текста */
     text-decoration: none; /* убирать подчёркивание у ссылок */
@@ -99,5 +114,112 @@ a.knopka {
 a.knopka:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
 a.knopka:active { background: rgb(152,15,0); } /* при нажатии */
 
+
+.table_div {
+    margin: 20px;
+    height: 570px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+}
+.table_div th, td {
+    width: 240px;
+    text-align: left;
+    padding-left: 15px;
+}
+.table_div .firstTh {
+    width: 40px;
+}
+.table_div .last {
+    width: 60px;
+}
+
+
+.pagination {
+    display: inline-block;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.pagination a.active {
+    background-color: rgb(212,75,56);
+    color: white;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+
+
+
+.response_status {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+
 H1 { text-align: center }
 H2 { text-align: center }
+
+
+
+.button1 {
+    background-color: rgb(212,75,56);
+    border: none;
+    color: white;
+    padding: 2px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+.button1:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+.button1:active { background: rgb(152,15,0); } /* при нажатии */
+
+.button2 {
+    background-color: rgb(31, 179, 50);
+    border: none;
+    color: white;
+    padding: 2px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+.button2:hover { background: rgb(33, 230, 53); } /* при наведении курсора мышки */
+.button2:active { background: rgb(31, 105, 49); } /* при нажатии */
+
+.button21 {
+    margin: 0 2px;
+    background-color: rgb(31, 179, 50);
+    border: none;
+    color: white;
+    padding: 2px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+.button21:hover { background: rgb(33, 230, 53); } /* при наведении курсора мышки */
+.button21:active { background: rgb(31, 105, 49); } /* при нажатии */
+
+.button22 {
+    margin: 0 2px;
+    background-color: rgb(180, 119, 41);
+    border: none;
+    color: white;
+    padding: 2px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+.button22:hover { background: rgb(237, 170, 43); } /* при наведении курсора мышки */
+.button22:active { background: rgb(125, 76, 34); } /* при нажатии */
+
+
+.input_name, .input_tran {
+    padding: 0px;
+    border-width: 0px;
+}

@@ -8,36 +8,41 @@
 <div class="page">
     <div class="header"></div>
     <div>
+
         <div class="left-side">
             <div class="widget">
                 <h3 class="widget-title">Категории</h3>
                 <ul class="widget-list">
                     <li><a href="/">Главная</a></li>
-                    <li><a href="">Игра</a></li>
+                    <li><a href="/play">Игра</a></li>
                     <li><a href="/list">Словарь</a></li>
-                    <li><a href="/loadnew">Добавить</a></li>
+                    <li><a href="">Добавить</a></li>
                     <li><a href="/documentation">API</a></li>
                 </ul>
             </div>
         </div>
+
         <div class="content">
             <div>
+                <form>
                 <table class="play">
                     <tr>
                         <td><h2>Word: </h2></td>
                         <td><h2>Rus:  </h2></td>
                     </tr>
                     <tr>
-                        <td><h2 class="greeting-id"></h2></td>
-                        <td><h2 class="greeting-content" id="translate" hidden="true"></h2></td>
+                        <td><input type="text" id="text1" size="20" name="name"></td>
+                        <td><input type="text" id="text2" size="20" name="translate"></td>
                     </tr>
                     <tr>
-                        <td><a href="#" class="knopka" onClick="myFunction();">следующее слово</a></td>
-                        <td><a href="#" class="knopka" onClick="setVisible();">показать перевод</a></td>
+                        <td><a href="#" type="submit" class="knopka" onClick="sendWord();">Сохранить</a></td>
+                        <td><h2 class="response_status"></h2></td>
                     </tr>
                 </table>
+                </form>
             </div>
         </div>
+
     </div>
     <div class="footer"></div>
 </div>

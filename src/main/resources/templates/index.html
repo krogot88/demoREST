@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="page">
@@ -16,6 +15,8 @@
                     <li><a href="">Главная</a></li>
                     <li><a href="/play">Игра</a></li>
                     <li><a href="/list">Словарь</a></li>
+                    <li><a href="/loadnew">Добавить</a></li>
+                    <li><a href="/documentation">API</a></li>
                 </ul>
             </div>
         </div>
@@ -23,8 +24,13 @@
 
         </div>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+        <div class="ip_address"></div>
+    </div>
 </div>
 
 </body>
+<script th:src="@{/my_scripts.js}"></script>
+<script th:src="@{/jQuery341.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </html>
