@@ -60,7 +60,15 @@
 }
 .widget-list a:hover {color: #b99d61;}
 
+.api_list {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px;
+    letter-spacing: 1px;
 
+}
+.api_list p {
+    font-size: 13px;
+}
 
 table.list {
     border: solid 2px blue;

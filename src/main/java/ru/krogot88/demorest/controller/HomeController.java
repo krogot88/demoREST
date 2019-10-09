@@ -39,6 +39,11 @@ public class HomeController {
         return "loadnew";
     }
 
+    @RequestMapping(value = "/documentation", method = RequestMethod.GET)
+    public String getDocumentationPage() {
+        return "documentation";
+    }
+
     //  permanent 301 redirect to "list/1"
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getListPage() {

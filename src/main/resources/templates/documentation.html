@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="page">
+    <div class="header"></div>
+    <div>
+        <div class="left-side">
+            <div class="widget">
+                <h3 class="widget-title">Категории</h3>
+                <ul class="widget-list">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/play">Игра</a></li>
+                    <li><a href="/list">Словарь</a></li>
+                    <li><a href="/loadnew">Добавить</a></li>
+                    <li><a href="">API</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <div class="api_list">
+                <p>1. <strong>GET /getword</strong> -  случайное слово из БД, ответ <strong>200</strong></p>
+                <p>2. <strong>GET /word/{name}</strong> - выдает слово с указанным <strong>name</strong><br>
+                    если не найдено в БД - ответ <strong>404</strong><br>
+                    если успешно - ответ(<strong>200</strong>) <br>
+                </p>
+                <p>3. <strong>GET /word/{id}</strong> - выдает слово с указанным <strong>id</strong><br>
+                    если не найдено в БД - ответ <strong>404</strong><br>
+                    если успешно - ответ(<strong>200</strong>) <br>
+                </p>
+                <p>4. <strong>POST /word</strong> - попытка добавить <strong>новую</strong> запись в БД<br>
+                    если упешно - ответ <strong>201</strong><br>
+                    если же уже есть word с таким же <strong>name</strong>, то ответ <strong>409</strong>.
+                    То есть обнолвение записи не производится<br>
+                    Пример <strong>request body</strong> {"name": "window","translate": "окно"} <br>
+                    Пример <strong>request body</strong> {"id": 2,"name": "window","translate": "окно"}
+                    - id в body(!) игнорируется<br>
+                </p>
+                <p>5. <strong>PUT /word/{id}</strong> - попытка положить новое слово по <strong>id</strong>.<br>
+                    если <strong>id</strong> <= 0  - ответ <strong>400</strong><br>
+                    если записи с таки id не найдено - ответ <strong>404</strong><br>
+                    если новое <strong>name</strong> уже есть в другой записи - ответ <strong>409</strong><br>
+                    если успешно - ответ <strong>200</strong><br>
+                    Пример <strong>request body</strong> {"name": "window","translate": "окно"} <br>
+                    Пример <strong>request body</strong> {"id": 2,"name": "window","translate": "окно"}
+                    - id в body(!) игнорируется. Играет роль именно id в url<br>
+                </p>
+                <p>6. <strong>PUT /word</strong> - попытка добавить/отредактировать  запись в БД.<br>
+                    если записи с таким <strong>name</strong> нет,  будет добавлена новая, ответ <strong>200 (!)
+                        (не 201,временный баг)</strong><br>
+                    если запись с таким <strong>name</strong> есть,  будет отредактирована текущая
+                    (отредактиовано поле translate), ответ <strong>200</strong><br>
+                    Пример <strong>request body</strong> {"name": "window","translate": "окно"} <br>
+                    Пример <strong>request body</strong> {"id": 2,"name": "window","translate": "окно"}
+                    - id в body(!) игнорируется<br>
+                </p>
+                <p>7. <strong>DELETE /word/{id}</strong> - уделание слова с указанным <strong>id</strong><br>
+                    если записи с таким <strong>id</strong> не найдено - ответ <strong>404</strong><br>
+                    если успешно  - ответ <strong>204</strong><br>
+                </p>
+                <p>8. <strong>DELETE /word/{name}</strong> - уделание слова с указанным <strong>name</strong><br>
+                    если записи с таким <strong>name</strong> не найдено - ответ <strong>404</strong><br>
+                    если успешно  - ответ <strong>204</strong><br>
+                </p>
+                <p><strong></strong></p>
+                <p><strong></strong></p>
+                <p><strong></strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="ip_address"></div>
+    </div>
+</div>
+
+</body>
+<script th:src="@{/my_scripts.js}"></script>
+<script th:src="@{/jQuery341.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+</html>
