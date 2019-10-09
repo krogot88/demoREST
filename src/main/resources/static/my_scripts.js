@@ -13,6 +13,25 @@ function myFunction() {
     });
 }
 
+function deleteWord(id) {
+    $.ajax({
+        url : '/word/'+id,
+        datatype : 'json',
+        type : "delete",
+        contentType : "application/json",
+        success : function() {
+            var tableRow = document.getElementById(id);
+            tableRow.getElementsByTagName("td")[0].innerHTML = "-";
+            tableRow.getElementsByTagName("td")[1].innerHTML = "-";
+            tableRow.getElementsByTagName("td")[2].innerHTML = "-";
+            tableRow.getElementsByTagName("td")[3].innerHTML = "-";
+            tableRow.getElementsByTagName("td")[4].innerHTML = "-";
+        }
+    });
+}
+
+
+
 function sendWord() {
     $.ajax({
         url : '/word',

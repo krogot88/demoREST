@@ -103,6 +103,8 @@ a.knopka {
     padding: .7em 1.5em; /* отступ от текста */
     outline: none; /* убирать контур в Mozilla */
 }
+a.knopka:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+a.knopka:active { background: rgb(152,15,0); } /* при нажатии */
 
 
 .table_div {
@@ -112,12 +114,15 @@ a.knopka {
     letter-spacing: 1px;
 }
 .table_div th, td {
-    width: 340px;
+    width: 260px;
     text-align: left;
     padding-left: 15px;
 }
 .table_div .firstTh {
-    width: 50px;
+    width: 40px;
+}
+.table_div .last {
+    width: 40px;
 }
 
 
@@ -137,8 +142,7 @@ a.knopka {
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 
-a.knopka:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
-a.knopka:active { background: rgb(152,15,0); } /* при нажатии */
+
 
 
 .response_status {
@@ -149,3 +153,16 @@ a.knopka:active { background: rgb(152,15,0); } /* при нажатии */
 
 H1 { text-align: center }
 H2 { text-align: center }
+
+.button1 {
+    background-color: rgb(212,75,56); /* Green */
+    border: none;
+    color: white;
+    padding: 2px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+.button1:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+.button1:active { background: rgb(152,15,0); } /* при нажатии */

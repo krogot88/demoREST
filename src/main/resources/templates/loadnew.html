@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="jQuery341.js"></script>
-    <script src="my_scripts.js"></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="page">
@@ -50,4 +47,7 @@
 </div>
 
 </body>
+<script th:src="@{/my_scripts.js}"></script>
+<script th:src="@{/jQuery341.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </html>
