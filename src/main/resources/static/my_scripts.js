@@ -30,7 +30,45 @@ function deleteWord(id) {
     });
 }
 
+function editWord(id) {
+    var tableRow = document.getElementById(id);
+    var name = tableRow.getElementsByTagName("td")[1].textContent;
+    var tran = tableRow.getElementsByTagName("td")[2].textContent;
+    tableRow.getElementsByTagName("td")[1].innerHTML = "<input class='input_name' type=\"text\"" +
+        " id='name"+id +"' value='"+ name +"' size=\"24\">";
+    tableRow.getElementsByTagName("td")[2].innerHTML = "<input class='input_tran' type=\"text\"" +
+        " id='tran"+id +"' value='"+ tran +"' size=\"24\">";
 
+    tableRow.getElementsByTagName("td")[3].innerHTML =
+        "<button class=\"button21\" onclick=\"submitWord("+id+");\">Y</button>" +
+        "<button class=\"button22\" onclick=\"cancelWord("+id+",'"+name+"','"+tran+"');\">N</button>";
+}
+
+function submitWord(id) {
+    $.ajax({
+        url : '/word/'+id,
+        datatype : 'json',
+        type : "put",
+        contentType : "application/json; charset=utf-8",
+        data : JSON.stringify({
+            "name" : $('.input_name').val(),
+            "translate" : $('.input_tran').val()
+        }),
+        success : function(data) {
+            var tableRow = document.getElementById(id);
+            tableRow.getElementsByTagName("td")[1].innerHTML = data.name;
+            tableRow.getElementsByTagName("td")[2].innerHTML = data.translate;
+            tableRow.getElementsByTagName("td")[3].innerHTML = '<button class="button2" onclick="editWord('+id+');">E</button>';
+        }
+    });
+}
+
+function cancelWord(id,name,tran) {
+    var tableRow = document.getElementById(id);
+    tableRow.getElementsByTagName("td")[1].innerHTML = name;
+    tableRow.getElementsByTagName("td")[2].innerHTML = tran;
+    tableRow.getElementsByTagName("td")[3].innerHTML = '<button class="button2" onclick="editWord('+id+');">E</button>';
+}
 
 function sendWord() {
     $.ajax({

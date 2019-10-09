@@ -53,6 +53,11 @@ public class RESTController {
         if(id <= 0)
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         word.setId(id);
+
+        Word alreadyExistOnOverId = serviceWord.getWord(word.getName());
+        if(alreadyExistOnOverId.getId() != word.getId())
+            return new ResponseEntity<>( HttpStatus.CONFLICT);
+
         Word result = serviceWord.putWord(word);
         if(result == null)
             return new ResponseEntity<>( HttpStatus.NOT_FOUND);

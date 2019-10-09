@@ -66,6 +66,13 @@ public class ServiceWordsImpl implements ServiceWord {
 
     @Override
     public Word putWord(Word word) { //  this method don't create new one. Need fix
+
+        //  never true  because the same code exist in REST controller in method PUT /name/{id}
+        //  it is lay here for future refactor
+        Word alreadyExistOnOverId = wordRepository.findByName(word.getName());
+        if(alreadyExistOnOverId.getId() != word.getId())
+            return null;
+
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Long id = word.getId();
@@ -75,7 +82,7 @@ public class ServiceWordsImpl implements ServiceWord {
             temp.setName(word.getName());
             temp.setTranslate(word.getTranslate());
             session.update(temp);
-            transaction.commit();
+            transaction.commit();  //  where throw exception if we try fetch word with Name that already exist
             session.close();
             return temp;
         } else {  // ... if not found - return null
