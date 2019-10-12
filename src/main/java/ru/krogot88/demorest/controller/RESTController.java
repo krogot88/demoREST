@@ -78,7 +78,7 @@ public class RESTController {
     @RequestMapping(value = "/word/{idOrName}", method = RequestMethod.DELETE)
     public ResponseEntity<Word> deleteWord(@PathVariable("idOrName") String idOrName) {
         Boolean success = serviceWord.deleteWord(idOrName);
-        if(success == false)
+        if(!success)
             return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
