@@ -1,11 +1,16 @@
 package ru.krogot88.demorest.model;
 
+import org.springframework.beans.factory.annotation.Value;
+import ru.krogot88.demorest.validator.English;
+import ru.krogot88.demorest.validator.Russian;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "words")
@@ -16,9 +21,12 @@ public class Word {
     private Long id;
 
     @Column(name = "name")
+    @Size(min = 2, max = 50, message = "{word.too.short}")
+    @English
     private String name;
 
     @Column(name = "translate")
+    @Russian
     private String translate;
 
     public Word() {

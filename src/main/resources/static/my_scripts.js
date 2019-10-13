@@ -102,6 +102,13 @@ function sendWord() {
                     h2text.style.opacity = '0';
                 }, 2000);
             },
+            400: function(responseObject, textStatus, jqXHR) {
+                var h2text = document.querySelector('.response_status');
+                console.log(responseObject.responseJSON);
+                var json_err = responseObject.responseJSON;
+                h2text.textContent = json_err.name + " " + json_err.translate;
+                h2text.style.opacity = '1';
+            },
         }
     });
 }

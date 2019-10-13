@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.model.Word;
@@ -40,7 +41,7 @@ public class RESTController {
 
     // POST ,  the id  will be ignored anyway. Try insert new row in table and then get new id
     @RequestMapping(value = "/word", method = RequestMethod.POST)
-    public ResponseEntity<Word> saveWord(@RequestBody Word word) {
+    public ResponseEntity<Word> saveWord(@Validated @RequestBody Word word) {
         Word result = serviceWord.saveNewWord(word);
         if(result == null)
             return new ResponseEntity<>( HttpStatus.CONFLICT);
