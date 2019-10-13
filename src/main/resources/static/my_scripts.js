@@ -71,6 +71,9 @@ function cancelWord(id,name,tran) {
 }
 
 function sendWord() {
+    $('.response_status_name').text("");
+    $('.response_status_translate').text("");
+
     $.ajax({
         url : '/word',
         type : "post",
@@ -104,10 +107,13 @@ function sendWord() {
             },
             400: function(responseObject, textStatus, jqXHR) {
                 var h2text = document.querySelector('.response_status');
-                console.log(responseObject.responseJSON);
-                var json_err = responseObject.responseJSON;
-                h2text.textContent = json_err.name + " " + json_err.translate;
+                h2text.textContent = 'error';
                 h2text.style.opacity = '1';
+                setTimeout(function () {
+                    h2text.style.opacity = '0';
+                }, 2000);
+                $('.response_status_name').text(responseObject.responseJSON.name);
+                $('.response_status_translate').text(responseObject.responseJSON.translate);
             },
         }
     });

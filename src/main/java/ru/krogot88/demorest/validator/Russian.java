@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Russian {
-    String message() default "{word.not.english}";
+    String message() default "{word.not.russian}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
