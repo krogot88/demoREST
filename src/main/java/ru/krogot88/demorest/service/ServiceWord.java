@@ -3,26 +3,29 @@ package ru.krogot88.demorest.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ru.krogot88.demorest.model.Word;
+import ru.krogot88.demorest.util.WordBox;
+
+import java.util.Map;
 
 /**
  * User: Сашок  Date: 28.09.2019 Time: 22:47
  */
 public interface ServiceWord {
-    Word getNextWord();
+    Word getRandomWord();
 
-    Word saveNewWord(Word word);
+    WordBox getWordById(Long id);
 
-    Word getWord(String idOrName);
+    WordBox getWordByName(String name);
 
-    Word getWordById(long id);
+    WordBox saveNewWord(Word word);
 
-    Word getWordByName(String name);
+    WordBox updateWordById(Word word, Long id);
 
-    Word putWord(Word word);
+    WordBox patchWordByName(Map<String,String> json, String name);
 
-    Word putWordOrUpdate(Word word);
+    WordBox deleteWordById(Long id);
 
-    boolean deleteWord(String idOrName);
+    WordBox deleteWordByName(String name);
 
     Page<Word> getPaginatedWords(Pageable pageable);
 }

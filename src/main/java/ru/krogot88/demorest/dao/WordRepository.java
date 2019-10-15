@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import ru.krogot88.demorest.model.Word;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User: Сашок  Date: 28.09.2019 Time: 22:46
@@ -14,10 +15,10 @@ import java.util.List;
 public interface WordRepository extends CrudRepository<Word,Long> {
     List<Word> findAll();
 
-    Word findByName(String name);
+    Optional<Word> findByName(String name);
 
     @Query(value = "SELECT * FROM words ORDER BY RANDOM() limit 1", nativeQuery = true )
-    Word findNextWord();
+    Word getRandomWord();
 
     Page<Word> findAll(Pageable pageable);
 }

@@ -1,18 +1,19 @@
 package ru.krogot88.demorest.service;
 
-import org.hibernate.Session;
+
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.model.Word;
+import ru.krogot88.demorest.util.WordBox;
 
-import javax.validation.ConstraintViolationException;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * User: Сашок  Date: 28.09.2019 Time: 22:47
@@ -26,112 +27,74 @@ public class ServiceWordsImpl implements ServiceWord {
     private static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     @Override
-    public Word getNextWord() {
-        Word result = null;
-        result = wordRepository.findNextWord();
+    public Word getRandomWord() {
+        Word result = wordRepository.getRandomWord();
         return result;
     }
 
     @Override
-    public Word saveNewWord(Word word) {
-        Word toSave = word;
-        word.setId(null);  //  we get id from db)))
+    public WordBox getWordById(Long id) {
+        Word word = wordRepository.findById(id).orElse(null);
+        if (word == null)
+            return new WordBox(HttpStatus.NOT_FOUND);
+        return new WordBox(word, HttpStatus.OK);
+    }
+
+    @Override
+    public WordBox getWordByName(String name) {
         try {
-            return wordRepository.save(toSave);
-        } catch (DataIntegrityViolationException e) {
-            return null;
+            Word word = wordRepository.findByName(name).get();
+            return new WordBox(word, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new WordBox(HttpStatus.NOT_FOUND);
         }
     }
 
     @Override
-    public Word getWordById(long id) {
-        return wordRepository.findById(id).orElse(null);
+    public WordBox saveNewWord(Word word) {
+        word.setId(null);
+        if (wordRepository.findByName(word.getName()).isPresent())
+            return new WordBox(HttpStatus.CONFLICT);
+        return new WordBox(wordRepository.save(word), HttpStatus.CREATED);
     }
 
     @Override
-    public Word getWordByName(String name) {
-        return wordRepository.findByName(name);
+    public WordBox updateWordById(Word word, Long id) {
+        if (!wordRepository.findById(id).isPresent())
+            return new WordBox(HttpStatus.NOT_FOUND);
+        if (wordRepository.findByName(word.getName()).isPresent() &&
+                wordRepository.findByName(word.getName()).get().getId() != id)
+            return new WordBox(HttpStatus.CONFLICT);
+        word.setId(id);
+        return new WordBox(wordRepository.save(word), HttpStatus.OK);
     }
 
     @Override
-    public Word getWord(String idOrName) {
-        Long id = 0L;
-        try {
-            id = Long.parseLong(idOrName);
-            return getWordById(id);
-        } catch (NumberFormatException e) {
-            return getWordByName(idOrName);
-        }
+    public WordBox patchWordByName(Map<String, String> json, String name) {
+        Word word = wordRepository.findByName(name).orElse(null);
+        if (word == null)
+            return new WordBox(HttpStatus.NOT_FOUND);
+        if(!json.containsKey("translate"))
+            return new WordBox(HttpStatus.BAD_REQUEST);
+        word.setTranslate(json.get("translate"));
+        return new WordBox(wordRepository.save(word), HttpStatus.OK);
     }
 
     @Override
-    public Word putWord(Word word) { //  this method don't create new one. Need fix
-
-        //  never true  because the same code exist in REST controller in method PUT /name/{id}
-        //  it is lay here for future refactor
-        Word alreadyExistOnOverId = wordRepository.findByName(word.getName());
-        if(alreadyExistOnOverId.getId() != word.getId())
-            return null;
-
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Long id = word.getId();
-        Word temp = wordRepository.findById(id).orElse(null);
-
-        if(temp != null) {  // ... and update existing word
-            temp.setName(word.getName());
-            temp.setTranslate(word.getTranslate());
-            session.update(temp);
-            transaction.commit();  //  where throw exception if we try fetch word with Name that already exist
-            session.close();
-            return temp;
-        } else {  // ... if not found - return null
-            //
-            //  need POST  word to specified id. But now postgre increase id by next value
-            //  so now  just return null - " 404 not found"
-            //
-            return null;
-        }
+    public WordBox deleteWordById(Long id) {
+        if (!wordRepository.findById(id).isPresent())
+            return new WordBox(HttpStatus.NOT_FOUND);
+        wordRepository.deleteById(id);
+        return new WordBox(HttpStatus.NO_CONTENT);
     }
 
     @Override
-    public Word putWordOrUpdate(Word word) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Word temp = wordRepository.findByName(word.getName());
-
-        if(temp != null) {
-            temp.setTranslate(word.getTranslate());
-            session.update(temp);
-            transaction.commit();
-            session.close();
-        } else  {
-            temp = wordRepository.save(word);
-        }
-        return temp;
-    }
-
-    @Override
-    public boolean deleteWord(String idOrName) {
-        Long id = 0L;
-        try {
-            id = Long.parseLong(idOrName);
-            Word forDelete = wordRepository.findById(id).orElse(null);
-            if(forDelete == null)
-                return false;
-            else {
-                wordRepository.deleteById(id);
-                return true;
-            }
-        } catch (NumberFormatException e) {
-            Word forDelete = wordRepository.findByName(idOrName);
-            if(forDelete == null)
-                return false;
-            else {
-                wordRepository.delete(forDelete);
-                return true;
-            }
-        }
+    public WordBox deleteWordByName(String name) {
+        Word word = wordRepository.findByName(name).orElse(null);
+        if (word == null)
+            return new WordBox(HttpStatus.NOT_FOUND);
+        wordRepository.delete(word);
+        return new WordBox(HttpStatus.NO_CONTENT);
     }
 
     @Override

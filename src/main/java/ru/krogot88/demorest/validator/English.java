@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  */
 @Documented
 @Constraint(validatedBy = EnglishValidator.class)
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD,ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface English {
     String message() default "{word.not.english}";
