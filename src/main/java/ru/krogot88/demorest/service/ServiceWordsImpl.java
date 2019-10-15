@@ -42,12 +42,10 @@ public class ServiceWordsImpl implements ServiceWord {
 
     @Override
     public WordBox getWordByName(String name) {
-        try {
-            Word word = wordRepository.findByName(name).get();
-            return new WordBox(word, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
+        Word word = wordRepository.findByName(name).orElse(null);
+        if (word == null)
             return new WordBox(HttpStatus.NOT_FOUND);
-        }
+        return new WordBox(word, HttpStatus.OK);
     }
 
     @Override

@@ -15,7 +15,7 @@ function myFunction() {
 
 function deleteWord(id) {
     $.ajax({
-        url: "/word/" + id,
+        url: "/word/id/" + id,
         datatype: "json",
         type: "delete",
         contentType: "application/json",
@@ -35,9 +35,9 @@ function editWord(id) {
     var name = tableRow.getElementsByTagName("td")[1].textContent;
     var tran = tableRow.getElementsByTagName("td")[2].textContent;
     tableRow.getElementsByTagName("td")[1].innerHTML = "<input class='input_name' type='text'" +
-        " id='name" + id + "' value='" + name + "' size='24'>";
+        " value='" + name + "' size='24'>";
     tableRow.getElementsByTagName("td")[2].innerHTML = "<input class='input_tran' type='text'" +
-        " id='tran" + id + "' value='" + tran + "' size='24'>";
+        " value='" + tran + "' size='24'>";
 
     tableRow.getElementsByTagName("td")[3].innerHTML =
         "<button class='button21' onclick='submitWord(" + id + ");'>Y</button>" +
@@ -46,7 +46,7 @@ function editWord(id) {
 
 function submitWord(id) {
     $.ajax({
-        url: "/word/" + id,
+        url: "/word/id/" + id,
         datatype: "json",
         type: "put",
         contentType: "application/json; charset=utf-8",
@@ -82,7 +82,6 @@ function sendWord() {
         datatype: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
-            "id": null,
             "name": $("#text1").val(),
             "translate": $("#text2").val()
         }),
