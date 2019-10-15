@@ -47,6 +47,16 @@ public class HomeController {
         return "login";
     }
 
+    @GetMapping(value = "/registration")
+    public String getRegistrationPage(Model model) {
+        return "registration";
+    }
+
+    @PostMapping(value = "/registration")
+    public String postRegistrationPage() {
+        return "redirect:login";
+    }
+
     @GetMapping(value = "/list")
     public String getListPage() {
         return "redirect:list/1";
