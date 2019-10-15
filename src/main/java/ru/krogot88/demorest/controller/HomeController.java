@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.krogot88.demorest.model.Word;
@@ -39,6 +40,12 @@ public class HomeController {
     @GetMapping(value = "/documentation")
     public String getDocumentationPage() {
         return "documentation";
+    }
+
+    @GetMapping(value = "/login")
+    public String getLoginPage(Model model) {
+
+        return "login";
     }
 
     @GetMapping(value = "/list")

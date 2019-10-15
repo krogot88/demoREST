@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -13,34 +13,41 @@
                 <h3 class="widget-title">Категории</h3>
                 <ul class="widget-list">
                     <li><a href="/">Главная</a></li>
-                    <li><a href="">Игра</a></li>
+                    <li><a href="/play">Игра</a></li>
                     <li><a href="/list">Словарь</a></li>
                     <li><a href="/loadnew">Добавить</a></li>
                     <li><a href="/documentation">API</a></li>
-                    <li><a href="/login">login</a></li>
+                    <li><a href="">login</a></li>
                 </ul>
             </div>
         </div>
         <div class="content">
-            <div>
-                <table class="play">
+            <form action="/login" method="POST">
+                <table>
                     <tr>
-                        <td><h2>Word: </h2></td>
-                        <td><h2>Rus:  </h2></td>
+                        <td>User:</td>
+                        <td><input type="text" name="username" value=""></td>
                     </tr>
                     <tr>
-                        <td><h2 class="greeting-id"></h2></td>
-                        <td><h2 class="greeting-content" id="translate" hidden="true"></h2></td>
+                        <td>Password:</td>
+                        <td><input type="password" name="password" /></td>
                     </tr>
                     <tr>
-                        <td><a href="#" class="knopka" onClick="myFunction();">следующее слово</a></td>
-                        <td><a href="#" class="knopka" onClick="setVisible();">показать перевод</a></td>
+                        <td><input name="submit" type="submit" value="submit" /></td>
                     </tr>
                 </table>
+            </form>
+            <div sec:authorize="isAnonymous()" >
+                <form id="logoutForm" method="post" action="/logout">
+                    vdgvffghgh
+                </form>
+                <h2>Admin page ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
             </div>
         </div>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+        <div class="ip_address"></div>
+    </div>
 </div>
 
 </body>
