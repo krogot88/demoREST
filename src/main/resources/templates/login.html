@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </head>
 <body>
 <div class="page">
@@ -37,11 +40,11 @@
                     </tr>
                 </table>
             </form>
-            <div sec:authorize="isAnonymous()" >
+            <div sec:authorize="isAuthenticated()" >
                 <form id="logoutForm" method="post" action="/logout">
                     vdgvffghgh
                 </form>
-                <h2>Admin page ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+                <h2><a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
             </div>
         </div>
     </div>
@@ -53,5 +56,4 @@
 </body>
 <script th:src="@{/my_scripts.js}"></script>
 <script th:src="@{/jQuery341.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </html>

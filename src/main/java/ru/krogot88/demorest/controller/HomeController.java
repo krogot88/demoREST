@@ -22,7 +22,7 @@ public class HomeController {
     @Autowired
     private ServiceWord serviceWord;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = {"/","/index"})
     public String getIndexPage() {
         return "index";
     }
