@@ -35,7 +35,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="word : ${wordList}" th:id="${{word.id}}">
+                    <tr th:each="word : ${wordList}"  th:attr="word-id=${{word.id}}">
                         <td class="firstTh" th:text="${{word.id}}">...</td>
                         <td th:text="${{word.name}}">...</td>
                         <td th:text="${{word.translate}}">...</td>

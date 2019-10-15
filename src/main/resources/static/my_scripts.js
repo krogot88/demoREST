@@ -20,7 +20,7 @@ function deleteWord(id) {
         type: "delete",
         contentType: "application/json",
         success: function () {
-            var tableRow = document.getElementById(id);
+            var tableRow = document.querySelector("[word-id=\"" + id + "\"]");
             tableRow.getElementsByTagName("td")[0].innerHTML = "-";
             tableRow.getElementsByTagName("td")[1].innerHTML = "-";
             tableRow.getElementsByTagName("td")[2].innerHTML = "-";
@@ -31,7 +31,7 @@ function deleteWord(id) {
 }
 
 function editWord(id) {
-    var tableRow = document.getElementById(id);
+    var tableRow = document.querySelector("[word-id=\"" + id + "\"]");
     var name = tableRow.getElementsByTagName("td")[1].textContent;
     var tran = tableRow.getElementsByTagName("td")[2].textContent;
     tableRow.getElementsByTagName("td")[1].innerHTML = "<input class='input_name' type='text'" +
@@ -55,7 +55,7 @@ function submitWord(id) {
             "translate": $(".input_tran").val()
         }),
         success: function (data) {
-            var tableRow = document.getElementById(id);
+            var tableRow = document.querySelector("[word-id=\"" + id + "\"]");
             tableRow.getElementsByTagName("td")[1].innerHTML = data.name;
             tableRow.getElementsByTagName("td")[2].innerHTML = data.translate;
             tableRow.getElementsByTagName("td")[3].innerHTML =
@@ -65,7 +65,7 @@ function submitWord(id) {
 }
 
 function cancelWord(id, name, tran) {
-    var tableRow = document.getElementById(id);
+    var tableRow = document.querySelector("[word-id=\"" + id + "\"]");
     tableRow.getElementsByTagName("td")[1].innerHTML = name;
     tableRow.getElementsByTagName("td")[2].innerHTML = tran;
     tableRow.getElementsByTagName("td")[3].innerHTML =
