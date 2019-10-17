@@ -1,13 +1,13 @@
-package ru.krogot88.demorest.dao;
+package ru.krogot88.demorest.service;
 
 import ru.krogot88.demorest.model.Person;
 
 import java.util.Optional;
 
 /**
- * User: Сашок  Date: 12.10.2019 Time: 19:43
+ * User: Сашок  Date: 17.10.2019 Time: 12:02
  */
-public interface PersonRepository {
+public interface ServicePerson {
 
     void savePerson(Person person);
 

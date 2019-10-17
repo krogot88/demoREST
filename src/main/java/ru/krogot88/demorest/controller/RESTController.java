@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.service.ServiceWord;
-import ru.krogot88.demorest.util.WordBox;
+import ru.krogot88.demorest.dto.WordBox;
 
 import javax.validation.constraints.Positive;
 import java.util.Map;

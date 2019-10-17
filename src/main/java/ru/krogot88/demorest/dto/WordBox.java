@@ -1,4 +1,4 @@
-package ru.krogot88.demorest.util;
+package ru.krogot88.demorest.dto;
 
 import org.springframework.http.HttpStatus;
 import ru.krogot88.demorest.model.Word;

@@ -3,7 +3,7 @@ package ru.krogot88.demorest.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ru.krogot88.demorest.model.Word;
-import ru.krogot88.demorest.util.WordBox;
+import ru.krogot88.demorest.dto.WordBox;
 
 import java.util.Map;
 

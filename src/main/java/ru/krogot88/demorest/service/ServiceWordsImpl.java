@@ -10,10 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.model.Word;
-import ru.krogot88.demorest.util.WordBox;
+import ru.krogot88.demorest.dto.WordBox;
 
 import java.util.Map;
-import java.util.NoSuchElementException;
+
 
 /**
  * User: Сашок  Date: 28.09.2019 Time: 22:47

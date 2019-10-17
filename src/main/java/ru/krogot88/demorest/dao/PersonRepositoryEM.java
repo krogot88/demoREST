@@ -17,7 +17,7 @@ import java.util.Optional;
  * User: Сашок  Date: 16.10.2019 Time: 15:19
  */
 @Repository
-public class PersonExperemntalEM {
+public class PersonRepositoryEM implements PersonRepository{
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
@@ -26,15 +26,15 @@ public class PersonExperemntalEM {
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void savePerson() {
+    public void savePerson(Person person) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
-        Person person = new Person();
-        person.setLogin("test1");
-        person.setPassword(passwordEncoder.encode("555"));
+        Person person1 = new Person();
+        person1.setLogin("test1");
+        person1.setPassword(passwordEncoder.encode("555"));
 
-        em.persist(person);
+        em.persist(person1);
         em.getTransaction().commit();
         em.close();
     }

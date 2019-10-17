@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.krogot88.demorest.dao.PersonExperemntalEM;
 import ru.krogot88.demorest.model.Word;
+import ru.krogot88.demorest.service.ServicePerson;
 import ru.krogot88.demorest.service.ServiceWord;
 import ru.krogot88.demorest.util.Utils;
 
@@ -22,7 +22,7 @@ public class HomeController {
     private ServiceWord serviceWord;
 
     @Autowired
-    private PersonExperemntalEM personExperemntalEM;
+    private ServicePerson servicePerson;
 
     @GetMapping(value = {"/","/index"})
     public String getIndexPage() {
@@ -56,7 +56,7 @@ public class HomeController {
 
     @PostMapping(value = "/registration")
     public String postRegistrationPage() {
-        //personExperemntalEM.savePerson();
+        //servicePerson.savePerson();
         return "redirect:login";
     }
 
