@@ -12,7 +12,7 @@ CREATE TABLE persons
 CREATE TABLE roles
 (
     id        SERIAL PRIMARY KEY NOT NULL,
-    role_name VARCHAR(255)       NOT NULL UNIQUE
+    roleName VARCHAR(255)       NOT NULL UNIQUE
 );
 
 -- create table person_roles
@@ -35,8 +35,8 @@ CREATE TABLE words
 INSERT INTO  public.persons(login, password) VALUES ('admin','$2a$10$miBQoc0AY707mmunbCi3XOXDnomPFwhwjN7utR438V0APQ2VIB7pC');
 INSERT INTO  public.persons(login, password) VALUES ('user','$2a$10$qt2wg9djI5kzq/Wszr5M1uP.dYAVmU9xNaXbMY.ztPCc0rezqWL.m');
 
-INSERT INTO roles(role_name) VALUES ('ROLE_ADMIN');
-INSERT INTO roles(role_name) VALUES ('ROLE_USER');
+INSERT INTO roles(roleName) VALUES ('ROLE_ADMIN');
+INSERT INTO roles(roleName) VALUES ('ROLE_USER');
 
 INSERT INTO person_roles(person_id, role_id) VALUES (1,1);
 INSERT INTO person_roles(person_id, role_id) VALUES (1,2);

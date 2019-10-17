@@ -15,17 +15,17 @@ public class Role {
     private Long id;
 
     @Column
-    private String role_name;
+    private String roleName;
 
-    @ManyToMany(mappedBy = "role_list")
-    private List<Person> person_list;
+    @ManyToMany(mappedBy = "roleList")
+    private List<Person> personList;
 
     public Role() {
     }
 
-    public Role(Long id, String role_name) {
+    public Role(Long id, String roleName) {
         this.id = id;
-        this.role_name = role_name;
+        this.roleName = roleName;
     }
 
     public Long getId() {
@@ -36,19 +36,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole_name() {
-        return role_name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public List<Person> getPerson_list() {
-        return person_list;
+    public List<Person> getPersonList() {
+        return personList;
     }
 
-    public void setPerson_list(List<Person> person_list) {
-        this.person_list = person_list;
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
     }
 }

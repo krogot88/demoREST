@@ -25,7 +25,7 @@ public class Person {
     @JoinTable(name = "person_roles",
     joinColumns = @JoinColumn(name = "person_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> role_list;
+    private List<Role> roleList;
 
     public Person() {
     }
@@ -60,11 +60,11 @@ public class Person {
         this.password = password;
     }
 
-    public List<Role> getRole_list() {
-        return role_list;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setRole_list(List<Role> role_list) {
-        this.role_list = role_list;
+    public void setRoleList(List<Role> role_list) {
+        this.roleList = role_list;
     }
 }
