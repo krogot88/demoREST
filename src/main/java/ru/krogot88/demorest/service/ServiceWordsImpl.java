@@ -1,18 +1,16 @@
 package ru.krogot88.demorest.service;
 
-
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.krogot88.demorest.dao.WordRepository;
+import ru.krogot88.demorest.dto.WordFourDTO;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.dto.ResponseWrapper;
 
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -24,11 +22,31 @@ public class ServiceWordsImpl implements ServiceWord {
     @Autowired
     private WordRepository wordRepository;
 
-    private static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    @Override
+    public ResponseWrapper<WordFourDTO> getRandomWordFourDTO() {
+        WordFourDTO resultDTO = new WordFourDTO();
+        Word word = wordRepository.getRandomWord();
+        List<String> list = new ArrayList<>();
+        list.add(word.getTranslate());
+        while (list.size() != 4) {
+            Word temp = wordRepository.getRandomWord();
+            if(!list.contains(temp.getTranslate())) {
+                list.add(temp.getTranslate());
+            }
+        }
+        Collections.shuffle(list);
+        resultDTO.setName(word.getName());
+        resultDTO.setTranslate1(list.get(0));
+        resultDTO.setTranslate2(list.get(1));
+        resultDTO.setTranslate3(list.get(2));
+        resultDTO.setTranslate4(list.get(3));
+        return new ResponseWrapper<>(resultDTO,HttpStatus.OK);
+    }
+
 
     @Override
-    public Word getRandomWord() {
-        return wordRepository.getRandomWord();
+    public ResponseWrapper<Word> getRandomWord() {
+        return new ResponseWrapper<>(wordRepository.getRandomWord(),HttpStatus.OK);
     }
 
     @Override

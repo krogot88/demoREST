@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.krogot88.demorest.dto.WordFourDTO;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.service.ServiceWord;
 import ru.krogot88.demorest.dto.ResponseWrapper;
@@ -19,10 +20,16 @@ public class RESTController {
     @Autowired
     private ServiceWord serviceWord;
 
+    @GetMapping(value = "/word/random/game")
+    public ResponseEntity<WordFourDTO> getRandomWordForDTO() {
+        ResponseWrapper<WordFourDTO> responseWrapper = serviceWord.getRandomWordFourDTO();
+        return new ResponseEntity<>(responseWrapper.getEntity(), responseWrapper.getHttpStatus());
+    }
+
     @GetMapping(value = "/word/random")
     public ResponseEntity<Word> getRandomWord() {
-        Word result = serviceWord.getRandomWord();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        ResponseWrapper<Word> responseWrapper = serviceWord.getRandomWord();
+        return new ResponseEntity<>(responseWrapper.getEntity(), responseWrapper.getHttpStatus());
     }
 
     @GetMapping(value = "/word/id/{id}")

@@ -11,6 +11,7 @@ public class ResponseWrapper<T> {
     private T entity;
     private HttpStatus httpStatus;
 
+
     public ResponseWrapper() {
     }
 

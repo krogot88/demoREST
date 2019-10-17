@@ -2,6 +2,7 @@ package ru.krogot88.demorest.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import ru.krogot88.demorest.dto.WordFourDTO;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.dto.ResponseWrapper;
 
@@ -11,7 +12,10 @@ import java.util.Map;
  * User: Сашок  Date: 28.09.2019 Time: 22:47
  */
 public interface ServiceWord {
-    Word getRandomWord();
+
+    ResponseWrapper<WordFourDTO> getRandomWordFourDTO();
+
+    ResponseWrapper<Word> getRandomWord();
 
     ResponseWrapper<Word> getWordById(Long id);
 
