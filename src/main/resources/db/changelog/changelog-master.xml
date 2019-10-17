@@ -1,0 +1,12 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="krogot88" id="1">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 path="sql/init.sql"
+                 relativeToChangelogFile="false"
+                 />
+    </changeSet>
+</databaseChangeLog>

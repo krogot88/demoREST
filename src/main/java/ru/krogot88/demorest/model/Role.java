@@ -14,7 +14,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "rolename")  // spring rofl
     private String roleName;
 
     @ManyToMany(mappedBy = "roleList")

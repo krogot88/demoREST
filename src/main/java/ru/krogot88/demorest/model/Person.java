@@ -64,7 +64,7 @@ public class Person {
         return roleList;
     }
 
-    public void setRoleList(List<Role> role_list) {
-        this.roleList = role_list;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }

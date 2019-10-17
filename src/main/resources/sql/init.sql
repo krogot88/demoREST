@@ -12,7 +12,7 @@ CREATE TABLE persons
 CREATE TABLE roles
 (
     id        SERIAL PRIMARY KEY NOT NULL,
-    roleName VARCHAR(255)       NOT NULL UNIQUE
+    rolename  VARCHAR(255)       NOT NULL UNIQUE
 );
 
 -- create table person_roles
