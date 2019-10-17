@@ -6,29 +6,29 @@ import ru.krogot88.demorest.model.Word;
 /**
  * User: Сашок  Date: 14.10.2019 Time: 22:45
  */
-public class WordBox {
+public class ResponseWrapper<T> {
 
-    private Word word;
+    private T entity;
     private HttpStatus httpStatus;
 
-    public WordBox() {
+    public ResponseWrapper() {
     }
 
-    public WordBox(HttpStatus httpStatus) {
+    public ResponseWrapper(HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
     }
 
-    public WordBox(Word word, HttpStatus httpStatus) {
-        this.word = word;
+    public ResponseWrapper(T entity, HttpStatus httpStatus) {
+        this.entity = entity;
         this.httpStatus = httpStatus;
     }
 
-    public Word getWord() {
-        return word;
+    public T getEntity() {
+        return entity;
     }
 
-    public void setWord(Word word) {
-        this.word = word;
+    public void setEntity(T entity) {
+        this.entity = entity;
     }
 
     public HttpStatus getHttpStatus() {

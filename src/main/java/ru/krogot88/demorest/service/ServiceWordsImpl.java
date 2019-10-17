@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.model.Word;
-import ru.krogot88.demorest.dto.WordBox;
+import ru.krogot88.demorest.dto.ResponseWrapper;
 
 import java.util.Map;
 
@@ -28,71 +28,70 @@ public class ServiceWordsImpl implements ServiceWord {
 
     @Override
     public Word getRandomWord() {
-        Word result = wordRepository.getRandomWord();
-        return result;
+        return wordRepository.getRandomWord();
     }
 
     @Override
-    public WordBox getWordById(Long id) {
+    public ResponseWrapper<Word> getWordById(Long id) {
         Word word = wordRepository.findById(id).orElse(null);
         if (word == null)
-            return new WordBox(HttpStatus.NOT_FOUND);
-        return new WordBox(word, HttpStatus.OK);
+            return new ResponseWrapper<>(HttpStatus.NOT_FOUND);
+        return new ResponseWrapper<>(word, HttpStatus.OK);
     }
 
     @Override
-    public WordBox getWordByName(String name) {
+    public ResponseWrapper<Word> getWordByName(String name) {
         Word word = wordRepository.findByName(name).orElse(null);
         if (word == null)
-            return new WordBox(HttpStatus.NOT_FOUND);
-        return new WordBox(word, HttpStatus.OK);
+            return new ResponseWrapper<>(HttpStatus.NOT_FOUND);
+        return new ResponseWrapper<>(word, HttpStatus.OK);
     }
 
     @Override
-    public WordBox saveNewWord(Word word) {
+    public ResponseWrapper<Word> saveNewWord(Word word) {
         word.setId(null);
         if (wordRepository.findByName(word.getName()).isPresent())
-            return new WordBox(HttpStatus.CONFLICT);
-        return new WordBox(wordRepository.save(word), HttpStatus.CREATED);
+            return new ResponseWrapper<>(HttpStatus.CONFLICT);
+        return new ResponseWrapper<>(wordRepository.save(word), HttpStatus.CREATED);
     }
 
     @Override
-    public WordBox updateWordById(Word word, Long id) {
+    public ResponseWrapper<Word> updateWordById(Word word, Long id) {
         if (!wordRepository.findById(id).isPresent())
-            return new WordBox(HttpStatus.NOT_FOUND);
+            return new ResponseWrapper<>(HttpStatus.NOT_FOUND);
         if (wordRepository.findByName(word.getName()).isPresent() &&
                 wordRepository.findByName(word.getName()).get().getId() != id)
-            return new WordBox(HttpStatus.CONFLICT);
+            return new ResponseWrapper<>(HttpStatus.CONFLICT);
         word.setId(id);
-        return new WordBox(wordRepository.save(word), HttpStatus.OK);
+        return new ResponseWrapper<>(wordRepository.save(word), HttpStatus.OK);
     }
 
     @Override
-    public WordBox patchWordByName(Map<String, String> json, String name) {
+    public ResponseWrapper<Word> patchWordByName(Map<String, String> json, String name) {
         Word word = wordRepository.findByName(name).orElse(null);
         if (word == null)
-            return new WordBox(HttpStatus.NOT_FOUND);
+            return new ResponseWrapper<>(HttpStatus.NOT_FOUND);
         if(!json.containsKey("translate"))
-            return new WordBox(HttpStatus.BAD_REQUEST);
+            return new ResponseWrapper<>(HttpStatus.BAD_REQUEST);
         word.setTranslate(json.get("translate"));
-        return new WordBox(wordRepository.save(word), HttpStatus.OK);
+        return new ResponseWrapper<>(wordRepository.save(word), HttpStatus.OK);
     }
 
     @Override
-    public WordBox deleteWordById(Long id) {
+    public ResponseWrapper<Word> deleteWordById(Long id) {
         if (!wordRepository.findById(id).isPresent())
-            return new WordBox(HttpStatus.NOT_FOUND);
+            return new ResponseWrapper<>(HttpStatus.NOT_FOUND);
         wordRepository.deleteById(id);
-        return new WordBox(HttpStatus.NO_CONTENT);
+        return new ResponseWrapper<>(HttpStatus.NO_CONTENT);
     }
 
     @Override
-    public WordBox deleteWordByName(String name) {
+    public ResponseWrapper<Word> deleteWordByName(String name) {
         Word word = wordRepository.findByName(name).orElse(null);
         if (word == null)
-            return new WordBox(HttpStatus.NOT_FOUND);
+            return new ResponseWrapper<>(HttpStatus.NOT_FOUND);
         wordRepository.delete(word);
-        return new WordBox(HttpStatus.NO_CONTENT);
+        return new ResponseWrapper<>(HttpStatus.NO_CONTENT);
     }
 
     @Override
