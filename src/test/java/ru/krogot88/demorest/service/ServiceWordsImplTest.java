@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import ru.krogot88.demorest.dao.WordRepository;
-import ru.krogot88.demorest.dto.ResponseWrapper;
 import ru.krogot88.demorest.model.Word;
 
 import java.util.Optional;
