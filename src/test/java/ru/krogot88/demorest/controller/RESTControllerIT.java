@@ -188,4 +188,6 @@ public class RESTControllerIT {
         Assert.assertTrue(content.equals("{\"translate\":\"translate must not be empty\"}")
                 || content.equals("{\"translate\":\"word contain some not Russian letters\"}"));
     }
+
+
 }
