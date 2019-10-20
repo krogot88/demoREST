@@ -24,6 +24,9 @@ public class ServiceWordsImpl implements ServiceWord {
 
     @Override
     public ResponseWrapper<WordFourDTO> getRandomWordFourDTO() {
+        Long countRawsInTable = wordRepository.count();
+        if(countRawsInTable < 4)
+            return new ResponseWrapper<>(HttpStatus.NO_CONTENT);
         WordFourDTO resultDTO = new WordFourDTO();
         Word word = wordRepository.getRandomWord();
         List<String> list = new ArrayList<>();
@@ -46,6 +49,9 @@ public class ServiceWordsImpl implements ServiceWord {
 
     @Override
     public ResponseWrapper<Word> getRandomWord() {
+        Long countRawsInTable = wordRepository.count();
+        if(countRawsInTable < 1)
+            return new ResponseWrapper<>(HttpStatus.NO_CONTENT);
         return new ResponseWrapper<>(wordRepository.getRandomWord(),HttpStatus.OK);
     }
 

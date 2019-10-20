@@ -1,7 +1,6 @@
 package ru.krogot88.demorest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class RESTController {
     private ServiceWord serviceWord;
 
     @GetMapping(value = "/word/random/game")
-    public ResponseEntity<WordFourDTO> getRandomWordForDTO() {
+    public ResponseEntity<WordFourDTO> getRandomWordFourDTO() {
         ResponseWrapper<WordFourDTO> responseWrapper = serviceWord.getRandomWordFourDTO();
         return new ResponseEntity<>(responseWrapper.getEntity(), responseWrapper.getHttpStatus());
     }
@@ -73,4 +72,6 @@ public class RESTController {
         ResponseWrapper<Word> responseWrapper = serviceWord.deleteWordByName(name);
         return new ResponseEntity<>(responseWrapper.getEntity(), responseWrapper.getHttpStatus());
     }
+
+
 }

@@ -25,12 +25,12 @@ public class Word {
 
     @Column(name = "name")
     @Size(min = 2, max = 50, message = "{word.too.short}")
-    @English(message = "must be only Eng symbols")
+    @English(message = "{word.not.english}")
     private String name;
 
     @Column(name = "translate")
-    @Russian(message = "must be only Rus symbols")
-    @NotBlank(message = "must be not empty")
+    @Russian(message = "{word.not.russian}")
+    @NotBlank(message = "{translate.not.empty}")
     private String translate;
 
     public Word() {
