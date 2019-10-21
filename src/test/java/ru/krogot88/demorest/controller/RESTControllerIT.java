@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -22,6 +23,7 @@ import ru.krogot88.demorest.model.Word;
 
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -33,6 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class RESTControllerIT {
+
+    @Autowired
+    private MessageSource ms;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -109,7 +114,8 @@ public class RESTControllerIT {
 
         mvcResult = mockMvc.perform(get("/word/id/notLongID")).andExpect(status().isBadRequest()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
-        Assert.assertTrue(content.equals("{\"id\":\"id must be only digits\"}"));
+        Assert.assertTrue(content.equals("{\"id\":\"" +
+                ms.getMessage("id.not.digits",null, Locale.getDefault()) + "\"}"));
 
         mvcResult = mockMvc.perform(get("/word/id/3")).andExpect(status().isOk()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
@@ -164,29 +170,34 @@ public class RESTControllerIT {
                 .andExpect(status().isBadRequest())
                 .andReturn();
         content = mvcResult.getResponse().getContentAsString();
-        Assert.assertTrue(content.equals("{\"name\":\"word contain some not English letters\"}"));
+        Assert.assertTrue(content.equals("{\"name\":\"" +
+                ms.getMessage("word.not.english",null, Locale.getDefault()) + "\"}"));
 
         json = "{\"name\":\"one\",\"translate\": \"оди23dsb24н\"}";
         mvcResult = mockMvc.perform(post("/word").contentType(MediaType.APPLICATION_JSON_UTF8).content(json))
                 .andExpect(status().isBadRequest())
                 .andReturn();
         content = mvcResult.getResponse().getContentAsString();
-        Assert.assertTrue(content.equals("{\"translate\":\"word contain some not Russian letters\"}"));
+        Assert.assertTrue(content.equals("{\"translate\":\"" +
+                ms.getMessage("word.not.russian",null, Locale.getDefault()) + "\"}"));
 
         json = "{\"name\":\"o\",\"translate\": \"один\"}";
         mvcResult = mockMvc.perform(post("/word").contentType(MediaType.APPLICATION_JSON_UTF8).content(json))
                 .andExpect(status().isBadRequest())
                 .andReturn();
         content = mvcResult.getResponse().getContentAsString();
-        Assert.assertTrue(content.equals("{\"name\":\"word length must be more than one char\"}"));
+        Assert.assertTrue(content.equals("{\"name\":\"" +
+                ms.getMessage("word.too.short",null, Locale.getDefault()) + "\"}"));
 
         json = "{\"name\":\"four\",\"translate\": \"\"}";
         mvcResult = mockMvc.perform(post("/word").contentType(MediaType.APPLICATION_JSON_UTF8).content(json))
                 .andExpect(status().isBadRequest())
                 .andReturn();
         content = mvcResult.getResponse().getContentAsString();
-        Assert.assertTrue(content.equals("{\"translate\":\"translate must not be empty\"}")
-                || content.equals("{\"translate\":\"word contain some not Russian letters\"}"));
+        Assert.assertTrue(content.equals("{\"translate\":\"" +
+                ms.getMessage("translate.not.empty",null, Locale.getDefault()) + "\"}")
+                || content.equals("{\"translate\":\"" +
+                ms.getMessage("word.not.russian",null, Locale.getDefault()) + "\"}"));
     }
 
 

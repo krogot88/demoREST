@@ -1,5 +1,7 @@
 package ru.krogot88.demorest.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Path;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -17,6 +20,9 @@ import java.util.Map;
  */
 @RestControllerAdvice
 public class ExceptionMapper {
+
+    @Autowired
+    private MessageSource messageSource;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class})
@@ -49,7 +55,7 @@ public class ExceptionMapper {
     @ExceptionHandler({NumberFormatException.class})
     public Map<String, String> handleValidationExceptions2(NumberFormatException ex) {
         Map<String, String> errors = new HashMap<>();
-        errors.put("id","id must be only digits");
+        errors.put("id",messageSource.getMessage("id.not.digits",null, Locale.getDefault()));
         return errors;
     }
 }
