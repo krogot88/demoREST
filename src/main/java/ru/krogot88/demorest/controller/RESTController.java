@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.krogot88.demorest.dto.WordFourDTO;
+import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.service.ServiceWord;
 import ru.krogot88.demorest.dto.ResponseWrapper;
@@ -19,9 +19,9 @@ public class RESTController {
     @Autowired
     private ServiceWord serviceWord;
 
-    @GetMapping(value = "/word/random/game")
-    public ResponseEntity<WordFourDTO> getRandomWordFourDTO() {
-        ResponseWrapper<WordFourDTO> responseWrapper = serviceWord.getRandomWordFourDTO();
+    @GetMapping(value = "/word/random/game/{variants}")
+    public ResponseEntity<WordGameDTO> getRandomWordGameDTO(@Positive @PathVariable("variants") Long variants) {
+        ResponseWrapper<WordGameDTO> responseWrapper = serviceWord.getRandomWordGameDTO(variants);
         return new ResponseEntity<>(responseWrapper.getEntity(), responseWrapper.getHttpStatus());
     }
 

@@ -14,7 +14,7 @@ import org.mockito.stubbing.Answer;
 import org.springframework.http.HttpStatus;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.dto.ResponseWrapper;
-import ru.krogot88.demorest.dto.WordFourDTO;
+import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Word;
 
 import java.util.*;
@@ -47,22 +47,19 @@ public class ServiceWordsImplTest {
                 .thenReturn(new Word("three","три"))
                 .thenReturn(new Word("two","два"))
                 .thenReturn(new Word("one","один"));
-        ResponseWrapper<WordFourDTO> responseWrapper = null;
+        ResponseWrapper<WordGameDTO> responseWrapper = null;
 
-        responseWrapper = serviceWord.getRandomWordFourDTO();
+        responseWrapper = serviceWord.getRandomWordGameDTO(4L);
         Assert.assertTrue(responseWrapper.getEntity() == null);
         Assert.assertTrue(responseWrapper.getHttpStatus() == HttpStatus.NO_CONTENT);
 
-        responseWrapper = serviceWord.getRandomWordFourDTO();
+        responseWrapper = serviceWord.getRandomWordGameDTO(4L);
         Assert.assertTrue(responseWrapper.getEntity() != null);
         Assert.assertTrue(responseWrapper.getHttpStatus() == HttpStatus.OK);
 
         Set<String> translateSet = new HashSet<>();
-        WordFourDTO wordFourDTO = responseWrapper.getEntity();
-        translateSet.add(wordFourDTO.getTranslate1());
-        translateSet.add(wordFourDTO.getTranslate2());
-        translateSet.add(wordFourDTO.getTranslate3());
-        translateSet.add(wordFourDTO.getTranslate4());
+        WordGameDTO wordGameDTO = responseWrapper.getEntity();
+
         Assert.assertTrue(translateSet.size() == 4);
         Mockito.verify(wordRepository,Mockito.times(7)).getRandomWord();
     }

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.krogot88.demorest.dao.WordRepository;
-import ru.krogot88.demorest.dto.WordFourDTO;
+import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.dto.ResponseWrapper;
 
@@ -18,20 +18,21 @@ import java.util.*;
  */
 @Service
 public class ServiceWordsImpl implements ServiceWord {
+    private static final long MIN_ROW_COUNTS_IN_TABLE = 1L;
 
     @Autowired
     private WordRepository wordRepository;
 
     @Override
-    public ResponseWrapper<WordFourDTO> getRandomWordFourDTO() {
+    public ResponseWrapper<WordGameDTO> getRandomWordGameDTO(Long variants) {
         Long countRawsInTable = wordRepository.count();
-        if(countRawsInTable < 4)
+        if(countRawsInTable < variants)
             return new ResponseWrapper<>(HttpStatus.NO_CONTENT);
-        WordFourDTO resultDTO = new WordFourDTO();
+        WordGameDTO resultDTO = new WordGameDTO();
         Word word = wordRepository.getRandomWord();
         List<String> list = new ArrayList<>();
         list.add(word.getTranslate());
-        while (list.size() != 4) {
+        while (list.size() != variants) {
             Word temp = wordRepository.getRandomWord();
             if(!list.contains(temp.getTranslate())) {
                 list.add(temp.getTranslate());
@@ -39,10 +40,7 @@ public class ServiceWordsImpl implements ServiceWord {
         }
         Collections.shuffle(list);
         resultDTO.setName(word.getName());
-        resultDTO.setTranslate1(list.get(0));
-        resultDTO.setTranslate2(list.get(1));
-        resultDTO.setTranslate3(list.get(2));
-        resultDTO.setTranslate4(list.get(3));
+        resultDTO.setTranslates(list);
         return new ResponseWrapper<>(resultDTO,HttpStatus.OK);
     }
 
@@ -50,7 +48,7 @@ public class ServiceWordsImpl implements ServiceWord {
     @Override
     public ResponseWrapper<Word> getRandomWord() {
         Long countRawsInTable = wordRepository.count();
-        if(countRawsInTable < 1)
+        if(countRawsInTable < MIN_ROW_COUNTS_IN_TABLE)
             return new ResponseWrapper<>(HttpStatus.NO_CONTENT);
         return new ResponseWrapper<>(wordRepository.getRandomWord(),HttpStatus.OK);
     }

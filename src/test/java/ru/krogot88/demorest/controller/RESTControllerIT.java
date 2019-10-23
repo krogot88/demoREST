@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import ru.krogot88.demorest.dao.WordRepository;
-import ru.krogot88.demorest.dto.WordFourDTO;
+import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Word;
 
 
@@ -70,12 +70,9 @@ public class RESTControllerIT {
         wordRepository.save(word);
         mvcResult = mockMvc.perform(get("/word/random/game")).andExpect(status().isOk()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
-        WordFourDTO resultWordFourDTO = objectMapper.readValue(content,WordFourDTO.class);
+        WordGameDTO resultWordGameDTO = objectMapper.readValue(content, WordGameDTO.class);
         Set<String> translateSet = new HashSet<>();
-        translateSet.add(resultWordFourDTO.getTranslate1());
-        translateSet.add(resultWordFourDTO.getTranslate2());
-        translateSet.add(resultWordFourDTO.getTranslate3());
-        translateSet.add(resultWordFourDTO.getTranslate4());
+
         Assert.assertTrue(translateSet.size() == 4);
     }
 
