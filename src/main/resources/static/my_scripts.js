@@ -40,8 +40,8 @@ function editWord(id) {
         " value='" + tran + "' size='24'>";
 
     tableRow.getElementsByTagName("td")[3].innerHTML =
-        "<button class='button21' onclick='submitWord(" + id + ");'></button>" +
-        "<button class='button22' onclick=\"cancelWord(" + id + ",'" + name + "','" + tran + "');\">N</button>";
+        "<button class='button21' onclick='submitWord(" + id + ");'>" + textYES + "</button>" +
+        "<button class='button22' onclick=\"cancelWord(" + id + ",'" + name + "','" + tran + "');\">" + textNO + "</button>";
 }
 
 function submitWord(id) {
@@ -59,7 +59,7 @@ function submitWord(id) {
             tableRow.getElementsByTagName("td")[1].innerHTML = data.name;
             tableRow.getElementsByTagName("td")[2].innerHTML = data.translate;
             tableRow.getElementsByTagName("td")[3].innerHTML =
-                "<button class='button2' onclick='editWord(" + id + ");'>E</button>";
+                "<button class='button2' onclick='editWord(" + id + ");'>" + textEDIT + "</button>";
         }
     });
 }
@@ -69,7 +69,7 @@ function cancelWord(id, name, tran) {
     tableRow.getElementsByTagName("td")[1].innerHTML = name;
     tableRow.getElementsByTagName("td")[2].innerHTML = tran;
     tableRow.getElementsByTagName("td")[3].innerHTML =
-        "<button class='button2' onclick='editWord(" + id + ");'>E</button>";
+        "<button class='button2' onclick='editWord(" + id + ");'>" + textEDIT + "</button>";
 }
 
 function sendWord() {
