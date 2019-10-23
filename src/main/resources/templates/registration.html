@@ -13,14 +13,14 @@
     <div>
         <div class="left-side">
             <div class="widget">
-                <h3 class="widget-title">Категории</h3>
+                <h3 class="widget-title" th:text="#{mainmenu.categories}"></h3>
                 <ul class="widget-list">
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/play">Игра</a></li>
-                    <li><a href="/list">Словарь</a></li>
-                    <li><a href="/loadnew">Добавить</a></li>
-                    <li><a href="/documentation">API</a></li>
-                    <li><a href="/login">login</a></li>
+                    <li><a href="/" th:text="#{mainmenu.main}"></a></li>
+                    <li><a href="/play" th:text="#{mainmenu.game}"></a></li>
+                    <li><a href="/list" th:text="#{mainmenu.vocabulary}"></a></li>
+                    <li><a href="/loadnew" th:text="#{mainmenu.addnewword}"></a></li>
+                    <li><a href="/documentation" th:text="#{mainmenu.api}"></a></li>
+                    <li><a href="/login" th:text="#{mainmenu.login}"></a></li>
                 </ul>
             </div>
         </div>
@@ -29,19 +29,19 @@
                 <form action="/registration" method="POST">
                     <table>
                         <tr>
-                            <td>User:</td>
+                            <td th:text="#{registration.maintable.user}"></td>
                             <td><input type="text" name="username" value=""></td>
                         </tr>
                         <tr>
-                            <td>Password:</td>
+                            <td th:text="#{registration.maintable.password}"></td>
                             <td><input type="password" name="password"/></td>
                         </tr>
                         <tr>
-                            <td>Confirm password:</td>
+                            <td th:text="#{registration.maintable.password.confirm}"></td>
                             <td><input type="password" name="confirmPassword"/></td>
                         </tr>
                         <tr>
-                            <td><input name="submit" type="submit" value="submit"/></td>
+                            <td><input name="submit" type="submit" th:attr="value=#{registration.maintable.submit}"/></td>
                         </tr>
                     </table>
                 </form>

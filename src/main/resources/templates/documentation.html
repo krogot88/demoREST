@@ -11,68 +11,27 @@
     <div>
         <div class="left-side">
             <div class="widget">
-                <h3 class="widget-title">Категории</h3>
+                <h3 class="widget-title" th:text="#{mainmenu.categories}"></h3>
                 <ul class="widget-list">
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/play">Игра</a></li>
-                    <li><a href="/list">Словарь</a></li>
-                    <li><a href="/loadnew">Добавить</a></li>
-                    <li><a href="">API</a></li>
-                    <li><a href="/login">login</a></li>
+                    <li><a href="/" th:text="#{mainmenu.main}"></a></li>
+                    <li><a href="/play" th:text="#{mainmenu.game}"></a></li>
+                    <li><a href="/list" th:text="#{mainmenu.vocabulary}"></a></li>
+                    <li><a href="/loadnew" th:text="#{mainmenu.addnewword}"></a></li>
+                    <li><a href="" th:text="#{mainmenu.api}"></a></li>
+                    <li><a href="/login" th:text="#{mainmenu.login}"></a></li>
                 </ul>
             </div>
         </div>
         <div class="content">
             <div class="api_list">
-                <p>1. <strong>GET /word/random</strong> -  случайное слово из БД<br>
-                    не найдено - ответ <strong>404</strong>
-                    успешно - ответ <strong>200</strong>
-                </p>
-                <p>2. <strong>GET /word/id/{id}</strong> - выдает слово с указанным <strong>id</strong><br>
-                    <strong>id</strong> не целое число или <strong>id</strong> < 1 - ответ <strong>400</strong><br>
-                    не найдено - ответ <strong>404</strong><br>
-                    успешно - ответ <strong>200</strong><br>
-                </p>
-                <p>3. <strong>GET /word/name/{name}</strong> - выдает слово с указанным <strong>name</strong><br>
-                    не найдено - ответ <strong>404</strong><br>
-                    успешно - ответ <strong>200</strong><br>
-                </p>
-                <p>4. <strong>POST /word</strong> - попытка добавить <strong>новую</strong> запись в БД<br>
-                    <strong>translate</strong> или <strong>name</strong> не соответствует требованиям - ответ <strong>400</strong><br>
-                    если уже есть word с таким же <strong>name</strong>, то ответ <strong>409</strong> -
-                    обновление записи не производится<br>
-                    упешно - ответ <strong>201</strong><br>
-                    Пример <strong>request body</strong> {"name": "window","translate": "окно"} <br>
-                    Пример <strong>request body</strong> {"id": 2,"name": "window","translate": "окно"}
-                    - id в body(!) игнорируется<br>
-                </p>
-                <p>5. <strong>PUT /word/id/{id}</strong> - попытка изменить слово по <strong>id</strong><br>
-                    если <strong>id</strong> <= 0 или не число - ответ <strong>400</strong><br>
-                    <strong>translate</strong> или <strong>name</strong> не соответствует требованиям - ответ <strong>400</strong><br>
-                    если записи с таки id не найдено - ответ <strong>404</strong><br>
-                    если новое <strong>name</strong> уже есть в другой записи - ответ <strong>409</strong><br>
-                    если успешно - ответ <strong>200</strong><br>
-                    Пример <strong>request body</strong> {"name": "window","translate": "окно"} <br>
-                    Пример <strong>request body</strong> {"id": 2,"name": "window","translate": "окно"}
-                    - id в body(!) игнорируется. Играет роль именно id в url<br>
-                </p>
-                <p>6. <strong>PATCH /word/name/{name}</strong> - попытка имзенить translate поле у word<br>
-                    <strong>translate</strong> не соответствует требованиям - ответ <strong>400</strong><br>
-                    запись с таким <strong>name</strong> не найдена - ответ <strong>404</strong><br>
-                    успешно - ответ <strong>200</strong><br>
-                    Пример <strong>request body</strong> {"translate": "окно"} <br>
-                    Пример <strong>request body</strong> {"id": 2,"name": "window","translate": "окно"}
-                    - id и name в body(!) игнорируются<br>
-                </p>
-                <p>7. <strong>DELETE /word/id/{id}</strong> - удаление слова с указанным <strong>id</strong><br>
-                    если <strong>id</strong> <= 0 или не число - ответ <strong>400</strong><br>
-                    если записи с таким <strong>id</strong> не найдено - ответ <strong>404</strong><br>
-                    если успешно  - ответ <strong>204</strong><br>
-                </p>
-                <p>8. <strong>DELETE /word/name/{name}</strong> - удаление слова с указанным <strong>name</strong><br>
-                    если записи с таким <strong>name</strong> не найдено - ответ <strong>404</strong><br>
-                    если успешно  - ответ <strong>204</strong><br>
-                </p>
+                <p th:utext="#{documentation.mainlist.first}"></p>
+                <p th:utext="#{documentation.mainlist.second}"></p>
+                <p th:utext="#{documentation.mainlist.third}"></p>
+                <p th:utext="#{documentation.mainlist.fourth}"></p>
+                <p th:utext="#{documentation.mainlist.fifth}"></p>
+                <p th:utext="#{documentation.mainlist.sixth}"></p>
+                <p th:utext="#{documentation.mainlist.seventh}"></p>
+                <p th:utext="#{documentation.mainlist.eighth}"></p>
             </div>
         </div>
     </div>

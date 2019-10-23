@@ -12,14 +12,14 @@
 
         <div class="left-side">
             <div class="widget">
-                <h3 class="widget-title">Категории</h3>
+                <h3 class="widget-title" th:text="#{mainmenu.categories}"></h3>
                 <ul class="widget-list">
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/play">Игра</a></li>
-                    <li><a href="/list">Словарь</a></li>
-                    <li><a href="">Добавить</a></li>
-                    <li><a href="/documentation">API</a></li>
-                    <li><a href="/login">login</a></li>
+                    <li><a href="/" th:text="#{mainmenu.main}"></a></li>
+                    <li><a href="/play" th:text="#{mainmenu.game}"></a></li>
+                    <li><a href="/list" th:text="#{mainmenu.vocabulary}"></a></li>
+                    <li><a href="" th:text="#{mainmenu.addnewword}"></a></li>
+                    <li><a href="/documentation" th:text="#{mainmenu.api}"></a></li>
+                    <li><a href="/login" th:text="#{mainmenu.login}"></a></li>
                 </ul>
             </div>
         </div>
@@ -29,7 +29,7 @@
                 <div>
                     <table class="loadnew">
                         <tr>
-                            <td>english</td>
+                            <td th:text="#{loadnew.maintable.word}"></td>
                             <td><input type="text" id="text1" size="40" name="name"></td>
                         </tr>
                         <tr>
@@ -37,7 +37,7 @@
                             <td class="response_status_name"></td>
                         </tr>
                         <tr>
-                            <td>russian</td>
+                            <td th:text="#{loadnew.maintable.translate}"></td>
                             <td><input type="text" id="text2" size="40" name="translate"></td>
                         </tr>
                         <tr>
@@ -45,7 +45,7 @@
                             <td class="response_status_translate"></td>
                         </tr>
                         <tr>
-                            <td><a href="#" type="submit" class="knopka" onClick="sendWord();">Сохранить</a></td>
+                            <td><a href="#" type="submit" class="knopka" onClick="sendWord();" th:text="#{loadnew.maintable.save}">Сохранить</a></td>
                             <td class="response_status"></td>
                         </tr>
                     </table>

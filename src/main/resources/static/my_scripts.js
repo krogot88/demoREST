@@ -40,7 +40,7 @@ function editWord(id) {
         " value='" + tran + "' size='24'>";
 
     tableRow.getElementsByTagName("td")[3].innerHTML =
-        "<button class='button21' onclick='submitWord(" + id + ");'>Y</button>" +
+        "<button class='button21' onclick='submitWord(" + id + ");'></button>" +
         "<button class='button22' onclick=\"cancelWord(" + id + ",'" + name + "','" + tran + "');\">N</button>";
 }
 
