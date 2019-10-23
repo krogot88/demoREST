@@ -1,7 +1,6 @@
 package ru.krogot88.demorest.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.krogot88.demorest.model.Person;
@@ -13,28 +12,17 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.Optional;
 
-/**
- * User: Сашок  Date: 16.10.2019 Time: 15:19
- */
 @Repository
 public class PersonRepositoryEM implements PersonRepository{
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Transactional
     public void savePerson(Person person) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-
-        Person person1 = new Person();
-        person1.setLogin("test1");
-        person1.setPassword(passwordEncoder.encode("555"));
-
-        em.persist(person1);
+        em.persist(person);
         em.getTransaction().commit();
         em.close();
     }

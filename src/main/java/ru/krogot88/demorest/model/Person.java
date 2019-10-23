@@ -21,6 +21,9 @@ public class Person {
     @Column
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "person_roles",
     joinColumns = @JoinColumn(name = "person_id"),
@@ -34,6 +37,17 @@ public class Person {
         this.id = id;
         this.login = login;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", roleList=" + roleList +
+                '}';
     }
 
     public Long getId() {
@@ -66,5 +80,13 @@ public class Person {
 
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.krogot88.demorest.model.Person;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.service.ServicePerson;
 import ru.krogot88.demorest.service.ServiceWord;
@@ -55,8 +56,9 @@ public class HomeController {
     }
 
     @PostMapping(value = "/registration")
-    public String postRegistrationPage() {
-        //servicePerson.savePerson();
+    public String postRegistrationPage(Person person) {
+        System.out.println(person);
+        servicePerson.savePerson(person);
         return "redirect:login";
     }
 
