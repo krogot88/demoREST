@@ -25,6 +25,7 @@ import ru.krogot88.demorest.model.Word;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -58,22 +59,23 @@ public class RESTControllerIT {
     }
 
     @Test
-    public void getRandomWordFourDTOTest() throws Exception {
+    public void getRandomWordGameDTOTest() throws Exception {
         MvcResult mvcResult = null;
         String content = null;
+        Long rowsInTableWords = wordRepository.count();
 
-        mvcResult = mockMvc.perform(get("/word/random/game")).andExpect(status().isNoContent()).andReturn();
+        mvcResult = mockMvc.perform(get("/word/random/game/" + (rowsInTableWords + 1))).andExpect(status().isNoContent()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         Assert.assertTrue(content.equals(""));
 
-        Word word = new Word("four","четыре");
-        wordRepository.save(word);
-        mvcResult = mockMvc.perform(get("/word/random/game")).andExpect(status().isOk()).andReturn();
+        mvcResult = mockMvc.perform(get("/word/random/game/" + rowsInTableWords)).andExpect(status().isOk()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         WordGameDTO resultWordGameDTO = objectMapper.readValue(content, WordGameDTO.class);
         Set<String> translateSet = new HashSet<>();
-
-        Assert.assertTrue(translateSet.size() == 4);
+        for(String translate : resultWordGameDTO.getTranslates()) {
+            translateSet.add(translate);
+        }
+        Assert.assertTrue(translateSet.size() == rowsInTableWords);
     }
 
     @Test
@@ -82,17 +84,14 @@ public class RESTControllerIT {
         String content = null;
 
         Set<String> set = new HashSet<>();
-        for(int i = 0 ; i < 12;i++) {
+        while (set.size() != wordRepository.count()) {
             mvcResult = mockMvc.perform(get("/word/random")).andExpect(status().isOk()).andReturn();
             content = mvcResult.getResponse().getContentAsString();
             Word resultWord = objectMapper.readValue(content, Word.class);
             set.add(resultWord.getName());
         }
-        Assert.assertTrue(set.size() == 3);
 
-        wordRepository.deleteById(3L);
-        wordRepository.deleteById(2L);
-        wordRepository.deleteById(1L);
+        wordRepository.deleteAll();
         mvcResult = mockMvc.perform(get("/word/random")).andExpect(status().isNoContent()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         Assert.assertTrue(content.equals(""));
@@ -100,62 +99,66 @@ public class RESTControllerIT {
 
     @Test
     public void getWordByIdTest() throws Exception {
+        final Long randomIndexInTableWords = ThreadLocalRandom.current().nextLong(1,wordRepository.count());
+        final Long randomIndexNotInTableWords = ThreadLocalRandom.current().nextLong(wordRepository.count() + 1,Long.MAX_VALUE);
+        final String notLongType = "78456dhe574d5h";
+        Word wordStraightFromDatabase = wordRepository.findById(randomIndexInTableWords).get();
         MvcResult mvcResult = null;
         String content = null;
 
-        mockMvc.perform(get("/word/id/1")).andExpect(status().isOk());
-
-        mvcResult = mockMvc.perform(get("/word/id/40")).andExpect(status().isNotFound()).andReturn();
+        mvcResult = mockMvc.perform(get("/word/id/"+randomIndexNotInTableWords)).andExpect(status().isNotFound()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         Assert.assertTrue(content.equals(""));
 
-        mvcResult = mockMvc.perform(get("/word/id/notLongID")).andExpect(status().isBadRequest()).andReturn();
+        mvcResult = mockMvc.perform(get("/word/id/" + notLongType)).andExpect(status().isBadRequest()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         Assert.assertTrue(content.equals("{\"id\":\"" +
                 ms.getMessage("id.not.digits",null, Locale.getDefault()) + "\"}"));
 
-        mvcResult = mockMvc.perform(get("/word/id/3")).andExpect(status().isOk()).andReturn();
+        mvcResult = mockMvc.perform(get("/word/id/" + randomIndexInTableWords)).andExpect(status().isOk()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         Word resultWord = objectMapper.readValue(content,Word.class);
-        Assert.assertTrue(resultWord.getName().equals("three"));
-        Assert.assertTrue(resultWord.getTranslate().equals("три"));
+        Assert.assertEquals(wordStraightFromDatabase.getName(),resultWord.getName());
+        Assert.assertEquals(wordStraightFromDatabase.getTranslate(),resultWord.getTranslate());
     }
 
     @Test
     public void getWordByNameTest() throws Exception {
+        final String randomWordNameThatExistsInDatabase = wordRepository.getRandomWord().getName();
+        final String randomWordNameThatNotExistInDatabase = "kokoko";
         MvcResult mvcResult = null;
         String content = null;
 
-        mockMvc.perform(get("/word/name/one")).andExpect(status().isOk());
-
-        mvcResult = mockMvc.perform(get("/word/name/four")).andExpect(status().isNotFound()).andReturn();
+        mvcResult = mockMvc.perform(get("/word/name/" + randomWordNameThatNotExistInDatabase)).andExpect(status().isNotFound()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         Assert.assertTrue(content.equals(""));
 
-        mvcResult = mockMvc.perform(get("/word/name/three")).andExpect(status().isOk()).andReturn();
+        mvcResult = mockMvc.perform(get("/word/name/" + randomWordNameThatExistsInDatabase)).andExpect(status().isOk()).andReturn();
         content = mvcResult.getResponse().getContentAsString();
         Word resultWord = objectMapper.readValue(content,Word.class);
-        Assert.assertTrue(resultWord.getName().equals("three"));
-        Assert.assertTrue(resultWord.getTranslate().equals("три"));
+        Assert.assertEquals(randomWordNameThatExistsInDatabase,resultWord.getName());
     }
 
     @Test
     public void saveNewWordTest() throws Exception {
+        final String randomWordNameThatExistsInDatabase = wordRepository.getRandomWord().getName();
+        final String randomWordNameThatNotExistInDatabase = "kokoko";
         MvcResult mvcResult = null;
         String content = null;
         String json = null;
 
-        json = "{\"name\":\"four\",\"translate\": \"четыре\"}";
+        json = "{\"name\":\"" + randomWordNameThatNotExistInDatabase + "\",\"translate\": \"кококо\"}";
         mvcResult = mockMvc.perform(post("/word").contentType(MediaType.APPLICATION_JSON_UTF8).content(json))
                            .andExpect(status().isCreated())
                            .andReturn();
         content = mvcResult.getResponse().getContentAsString();
-        Word resultWord = objectMapper.readValue(content,Word.class);
-        Assert.assertTrue(resultWord.getId() == 4);
-        Assert.assertTrue(resultWord.getName().equals("four"));
-        Assert.assertTrue(resultWord.getTranslate().equals("четыре"));
+        Word wordInJsonResponse = objectMapper.readValue(content,Word.class);
+        Word savedWordInDatabase = wordRepository.findByName(randomWordNameThatNotExistInDatabase).get();
+        Assert.assertEquals(savedWordInDatabase.getId(),wordInJsonResponse.getId());
+        Assert.assertEquals(savedWordInDatabase.getName(),wordInJsonResponse.getName());
+        Assert.assertEquals(savedWordInDatabase.getTranslate(),wordInJsonResponse.getTranslate());
 
-        json = "{\"name\":\"one\",\"translate\": \"один\"}";
+        json = "{\"name\":\"" + randomWordNameThatExistsInDatabase + "\",\"translate\": \"неважно\"}";
         mvcResult = mockMvc.perform(post("/word").contentType(MediaType.APPLICATION_JSON_UTF8).content(json))
                 .andExpect(status().isConflict())
                 .andReturn();
