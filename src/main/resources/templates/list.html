@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </head>
 <body>
 <div class="page">
@@ -11,13 +12,14 @@
 
         <div class="left-side">
             <div class="widget">
-                <h3 class="widget-title">Категории</h3>
+                <h3 class="widget-title" th:text="#{mainmenu.categories}"></h3>
                 <ul class="widget-list">
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/play">Игра</a></li>
-                    <li><a href="">Словарь</a></li>
-                    <li><a href="/loadnew">Добавить</a></li>
-                    <li><a href="/documentation">API</a></li>
+                    <li><a href="/" th:text="#{mainmenu.main}"></a></li>
+                    <li><a href="/play" th:text="#{mainmenu.game}"></a></li>
+                    <li><a href="" th:text="#{mainmenu.vocabulary}"></a></li>
+                    <li><a href="/loadnew" th:text="#{mainmenu.addnewword}"></a></li>
+                    <li><a href="/documentation" th:text="#{mainmenu.api}"></a></li>
+                    <li><a href="/login" th:text="#{mainmenu.login}"></a></li>
                 </ul>
             </div>
         </div>
@@ -27,20 +29,20 @@
                 <table style="width:100%">
                     <thead>
                     <tr>
-                        <th class="firstTh">ID</th>
-                        <th>word</th>
-                        <th>translate</th>
-                        <th class="last">edit</th>
-                        <th class="last">del</th>
+                        <th class="firstTh" th:text="#{vocabulary.maintable.head.id}"></th>
+                        <th th:text="#{vocabulary.maintable.head.word}"></th>
+                        <th th:text="#{vocabulary.maintable.head.translate}"></th>
+                        <th class="last" th:text="#{vocabulary.maintable.head.edit}"></th>
+                        <th class="last" th:text="#{vocabulary.maintable.head.delete}"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="word : ${wordList}" th:id="${{word.id}}">
+                    <tr th:each="word : ${wordList}"  th:attr="word-id=${{word.id}}">
                         <td class="firstTh" th:text="${{word.id}}">...</td>
                         <td th:text="${{word.name}}">...</td>
                         <td th:text="${{word.translate}}">...</td>
-                        <td class="last"><button class="button2" th:onclick="'editWord(\'' + ${word.id} + '\');'">E</button></td>
-                        <td class="last"><button class="button1" th:onclick="'deleteWord(\'' + ${word.id} + '\');'">X</button></td>
+                        <td class="last"><button class="button2" th:onclick="'editWord(\'' + ${word.id} + '\');'" th:text="#{vocabulary.maintable.button.edit}"></button></td>
+                        <td class="last"><button class="button1" th:onclick="'deleteWord(\'' + ${word.id} + '\');'" th:text="#{vocabulary.maintable.button.delete}"></button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -63,5 +65,9 @@
 </body>
 <script th:src="@{/my_scripts.js}"></script>
 <script th:src="@{/jQuery341.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<script th:inline="javascript">
+    var textYES = "[(#{vocabulary.maintable.button.yes})]";
+    var textNO = "[(#{vocabulary.maintable.button.no})]";
+    var textEDIT = "[(#{vocabulary.maintable.button.edit})]";
+</script>
 </html>

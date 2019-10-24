@@ -1,11 +1,19 @@
 package ru.krogot88.demorest.model;
 
+
+import ru.krogot88.demorest.validator.English;
+import ru.krogot88.demorest.validator.Russian;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "words")
@@ -16,9 +24,13 @@ public class Word {
     private Long id;
 
     @Column(name = "name")
+    @Size(min = 2, max = 50, message = "{word.too.short}")
+    @English(message = "{word.not.english}")
     private String name;
 
     @Column(name = "translate")
+    @Russian(message = "{word.not.russian}")
+    @NotBlank(message = "{translate.not.empty}")
     private String translate;
 
     public Word() {
@@ -39,6 +51,8 @@ public class Word {
                 ", translate='" + translate + '\'' +
                 '}';
     }
+
+
 
     public Long getId() {
         return id;

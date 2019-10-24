@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+</head>
+<body>
+<div class="page">
+    <div class="header"></div>
+    <div>
+        <div class="left-side">
+            <div class="widget">
+                <h3 class="widget-title" th:text="#{mainmenu.categories}"></h3>
+                <ul class="widget-list">
+                    <li><a href="/" th:text="#{mainmenu.main}"></a></li>
+                    <li><a href="/play" th:text="#{mainmenu.game}"></a></li>
+                    <li><a href="/list" th:text="#{mainmenu.vocabulary}"></a></li>
+                    <li><a href="/loadnew" th:text="#{mainmenu.addnewword}"></a></li>
+                    <li><a href="/documentation" th:text="#{mainmenu.api}"></a></li>
+                    <li><a href="" th:text="#{mainmenu.login}"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <div sec:authorize="!isAuthenticated()">
+                <form action="/login" method="POST">
+                    <table>
+                        <tr>
+                            <td th:text="#{login.maintable.user}"></td>
+                            <td><input type="text" name="username" value=""></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{login.maintable.password}"></td>
+                            <td><input type="password" name="password"/></td>
+                        </tr>
+                        <tr>
+                            <td><input name="submit" type="submit"  th:attr="value=#{login.maintable.submit}"/></td>
+                            <td><a href="/registration" th:text="#{login.maintable.registration.link}"></a></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div sec:authorize="isAuthenticated()" >
+                <form id="logoutForm" method="post" action="/logout">
+                </form>
+                <h2><a onclick="document.forms['logoutForm'].submit()" class="knopka" th:text="#{login.maintable.logout}"></a></h2>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="ip_address"></div>
+    </div>
+</div>
+
+</body>
+<script th:src="@{/my_scripts.js}"></script>
+<script th:src="@{/jQuery341.js}"></script>
+</html>

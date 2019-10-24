@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </head>
 <body>
 <div class="page">
@@ -10,13 +11,14 @@
     <div>
         <div class="left-side">
             <div class="widget">
-                <h3 class="widget-title">Категории</h3>
+                <h3 class="widget-title" th:text="#{mainmenu.categories}"></h3>
                 <ul class="widget-list">
-                    <li><a href="">Главная</a></li>
-                    <li><a href="/play">Игра</a></li>
-                    <li><a href="/list">Словарь</a></li>
-                    <li><a href="/loadnew">Добавить</a></li>
-                    <li><a href="/documentation">API</a></li>
+                    <li><a href="" th:text="#{mainmenu.main}"></a></li>
+                    <li><a href="/play" th:text="#{mainmenu.game}"></a></li>
+                    <li><a href="/list" th:text="#{mainmenu.vocabulary}"></a></li>
+                    <li><a href="/loadnew" th:text="#{mainmenu.addnewword}"></a></li>
+                    <li><a href="/documentation" th:text="#{mainmenu.api}"></a></li>
+                    <li><a href="/login" th:text="#{mainmenu.login}"></a></li>
                 </ul>
             </div>
         </div>
@@ -32,5 +34,4 @@
 </body>
 <script th:src="@{/my_scripts.js}"></script>
 <script th:src="@{/jQuery341.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 </html>

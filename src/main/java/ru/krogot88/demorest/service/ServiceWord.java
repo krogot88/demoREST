@@ -2,27 +2,34 @@ package ru.krogot88.demorest.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Word;
+import ru.krogot88.demorest.dto.ResponseWrapper;
+
+import java.util.Map;
 
 /**
  * User: Сашок  Date: 28.09.2019 Time: 22:47
  */
 public interface ServiceWord {
-    Word getNextWord();
 
-    Word saveNewWord(Word word);
+    ResponseWrapper<WordGameDTO> getRandomWordGameDTO(Long variants);
 
-    Word getWord(String idOrName);
+    ResponseWrapper<Word> getRandomWord();
 
-    Word getWordById(long id);
+    ResponseWrapper<Word> getWordById(Long id);
 
-    Word getWordByName(String name);
+    ResponseWrapper<Word> getWordByName(String name);
 
-    Word putWord(Word word);
+    ResponseWrapper<Word> saveNewWord(Word word);
 
-    Word putWordOrUpdate(Word word);
+    ResponseWrapper<Word> updateWordById(Word word, Long id);
 
-    boolean deleteWord(String idOrName);
+    ResponseWrapper<Word> patchWordByName(Map<String,String> json, String name);
+
+    ResponseWrapper<Word> deleteWordById(Long id);
+
+    ResponseWrapper<Word> deleteWordByName(String name);
 
     Page<Word> getPaginatedWords(Pageable pageable);
 }
