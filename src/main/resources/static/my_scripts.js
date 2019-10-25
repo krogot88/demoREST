@@ -1,16 +1,23 @@
 function myFunction() {
-    document.getElementById("translate").hidden = true;
+
 
     $.ajax({
-        url: "/word/random",
+        url: "/word/random/game/4",
         datatype: "json",
         type: "get",
         contentType: "application/json",
         success: function (data) {
             $(".greeting-id").text(data.name);
-            $(".greeting-content").text(data.translate);
+            $("#translate1").text(data.translates[0]);
+            $("#translate2").text(data.translates[1]);
+            $("#translate3").text(data.translates[2]);
+            $("#translate4").text(data.translates[3]);
         }
     });
+}
+
+function setVisible() {
+
 }
 
 function deleteWord(id) {
@@ -118,10 +125,6 @@ function sendWord() {
             },
         }
     });
-}
-
-function setVisible() {
-    document.getElementById("translate").hidden = false;
 }
 
 window.onload = function () {
