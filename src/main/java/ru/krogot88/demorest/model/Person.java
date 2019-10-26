@@ -2,10 +2,7 @@ package ru.krogot88.demorest.model;
 
 import javax.persistence.*;
 import java.util.List;
-
-/**
- * User: Сашок  Date: 12.10.2019 Time: 18:50
- */
+import java.util.Set;
 
 @Entity
 @Table(name = "persons")
@@ -28,7 +25,14 @@ public class Person {
     @JoinTable(name = "person_roles",
     joinColumns = @JoinColumn(name = "person_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private List<Role> roleList;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "person_progress",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "word_id"))
+    private Set<Word> wordSet;
 
     public Person() {
     }
@@ -88,5 +92,13 @@ public class Person {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public Set<Word> getWordSet() {
+        return wordSet;
+    }
+
+    public void setWordSet(Set<Word> wordSet) {
+        this.wordSet = wordSet;
     }
 }

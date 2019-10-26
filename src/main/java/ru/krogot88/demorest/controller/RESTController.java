@@ -10,6 +10,7 @@ import ru.krogot88.demorest.service.ServiceWord;
 import ru.krogot88.demorest.dto.ResponseWrapper;
 
 import javax.validation.constraints.Positive;
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -28,6 +29,12 @@ public class RESTController {
     @GetMapping(value = "/word/random")
     public ResponseEntity<Word> getRandomWord() {
         ResponseWrapper<Word> responseWrapper = serviceWord.getRandomWord();
+        return new ResponseEntity<>(responseWrapper.getEntity(), responseWrapper.getHttpStatus());
+    }
+
+    @PostMapping(value = "/word/game")
+    public ResponseEntity<Word> checkWordTranslate(Principal principal, @Validated @RequestBody Word word) {
+        ResponseWrapper<Word> responseWrapper = serviceWord.checkWordTranslate(word,principal);
         return new ResponseEntity<>(responseWrapper.getEntity(), responseWrapper.getHttpStatus());
     }
 

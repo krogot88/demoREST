@@ -5,11 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import ru.krogot88.demorest.dao.PersonRepository;
 import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.dto.WordGameDTO;
+import ru.krogot88.demorest.model.Person;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.dto.ResponseWrapper;
 
+import java.security.Principal;
 import java.util.*;
 
 
@@ -21,7 +24,24 @@ public class ServiceWordsImpl implements ServiceWord {
     private static final long MIN_ROW_COUNTS_IN_TABLE = 1L;
 
     @Autowired
+    private PersonRepository personRepository;
+
+    @Autowired
     private WordRepository wordRepository;
+
+    @Override
+    public ResponseWrapper<Word> checkWordTranslate(Word testWord, Principal principal) {
+        Word realWord = wordRepository.findByName(testWord.getName()).orElse(null);
+        if(principal != null) {
+            if (testWord.getTranslate().equals(realWord.getTranslate())) {
+                Person person = personRepository.findByLogin(principal.getName()).orElse(null);
+                Set<Word> set = person.getWordSet();
+                set.add(realWord);
+                personRepository.savePerson(person);
+            }
+        }
+        return new ResponseWrapper<>(realWord,HttpStatus.OK);
+    }
 
     @Override
     public ResponseWrapper<WordGameDTO> getRandomWordGameDTO(Long variants) {

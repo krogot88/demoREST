@@ -25,10 +25,14 @@ function setVisible() {
 
 function checkAnswer(id) {
     $.ajax({
-        url: "/word/name/" + $(".greeting-id").text(),
+        url: "/word/game",
         datatype: "json",
-        type: "get",
+        type: "post",
         contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+            "name": $(".greeting-id").text(),
+            "translate": document.getElementById(id).textContent
+        }),
         success: function (data) {
             if($(id).text() == data.translate) {
                 setGreen(id);

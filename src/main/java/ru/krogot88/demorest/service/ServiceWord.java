@@ -6,12 +6,15 @@ import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.dto.ResponseWrapper;
 
+import java.security.Principal;
 import java.util.Map;
 
 /**
  * User: Сашок  Date: 28.09.2019 Time: 22:47
  */
 public interface ServiceWord {
+
+    ResponseWrapper<Word> checkWordTranslate(Word word, Principal principal);
 
     ResponseWrapper<WordGameDTO> getRandomWordGameDTO(Long variants);
 

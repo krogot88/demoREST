@@ -1,18 +1,14 @@
 package ru.krogot88.demorest.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.krogot88.demorest.validator.English;
 import ru.krogot88.demorest.validator.Russian;
 
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Entity
@@ -32,6 +28,10 @@ public class Word {
     @Russian(message = "{word.not.russian}")
     @NotBlank(message = "{translate.not.empty}")
     private String translate;
+
+    @ManyToMany(mappedBy = "wordSet")
+    @JsonIgnore   //  to avoid  infinite loop personList -> roleList ->personList ...   When select word and it exists in table person_progress
+    private List<Person> personList;
 
     public Word() {
         super();
@@ -75,5 +75,13 @@ public class Word {
     }
     public void setTranslate(String translate) {
         this.translate = translate;
+    }
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
+
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
     }
 }

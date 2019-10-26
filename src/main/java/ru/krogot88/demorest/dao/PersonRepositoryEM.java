@@ -22,7 +22,11 @@ public class PersonRepositoryEM implements PersonRepository{
     public void savePerson(Person person) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        em.persist(person);
+        if(person.getId() == null) {
+            em.persist(person);
+        } else {
+            em.merge(person);
+        }
         em.getTransaction().commit();
         em.close();
     }
