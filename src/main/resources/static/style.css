@@ -91,6 +91,8 @@ table.list td {
 table.play {
     margin: auto;
     margin-top: 30px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
 }
 table.play tr {
     text-align: center;

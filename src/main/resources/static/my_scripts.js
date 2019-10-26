@@ -1,5 +1,8 @@
 function myFunction() {
-
+    var translates = document.getElementsByClassName("greeting-content");
+    for(var i = 0; i < translates.length; i++) {
+        setColorNone(translates.item(i).id);
+    }
 
     $.ajax({
         url: "/word/random/game/4",
@@ -17,7 +20,44 @@ function myFunction() {
 }
 
 function setVisible() {
+    console.log(666);
+}
 
+function checkAnswer(id) {
+    $.ajax({
+        url: "/word/name/" + $(".greeting-id").text(),
+        datatype: "json",
+        type: "get",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if($(id).text() == data.translate) {
+                setGreen(id);
+            } else {
+                setRed(id);
+                var translates = document.getElementsByClassName("greeting-content");
+                for(var i = 0; i < translates.length; i++) {
+                    if(translates.item(i).textContent == data.translate) {
+                        setGreen(translates.item(i).id);
+                    }
+                }
+            }
+        }
+    });
+}
+
+function setGreen(id) {
+    var text = document.getElementById(id);
+    text.style.backgroundColor = "#8edb82";
+}
+
+function setRed(id) {
+    var text = document.getElementById(id);
+    text.style.backgroundColor = "#DB8E92";
+}
+
+function setColorNone(id) {
+    var text = document.getElementById(id);
+    text.style.backgroundColor = "";
 }
 
 function deleteWord(id) {
