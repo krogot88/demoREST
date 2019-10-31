@@ -43,8 +43,13 @@ public class PersonRepositoryEM implements PersonRepository{
 
         TypedQuery<Person> query = em.createQuery(q);
         query.setParameter(p, login);
-        Person person = query.getSingleResult();
-        Optional<Person> result = Optional.of(person);
+        Person person = null;
+        try {
+            person = query.getSingleResult();
+        } catch (NoResultException ex) {
+            // person still null
+        }
+        Optional<Person> result = Optional.ofNullable(person);
         return result;
     }
 }

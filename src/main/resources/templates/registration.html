@@ -26,19 +26,25 @@
         </div>
         <div class="content">
             <div sec:authorize="!isAuthenticated()">
-                <form action="/registration" method="POST">
+                <form action="/registration" th:object="${personForm}" method="POST">
                     <table>
                         <tr>
                             <td th:text="#{registration.maintable.user}"></td>
-                            <td><input type="text" name="login" value=""></td>
+                            <td><input type="text" th:field="*{login}" value="">
+                                <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Name Error</span>
+                            </td>
                         </tr>
                         <tr>
                             <td th:text="#{registration.maintable.password}"></td>
-                            <td><input type="password" name="password"/></td>
+                            <td><input type="password" th:field="*{password}"/>
+                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
+                            </td>
                         </tr>
                         <tr>
                             <td th:text="#{registration.maintable.password.confirm}"></td>
-                            <td><input type="password" name="confirmPassword"/></td>
+                            <td><input type="password" th:field="*{confirmPassword}"/>
+                                <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Name Error</span>
+                            </td>
                         </tr>
                         <tr>
                             <td><input name="submit" type="submit" th:attr="value=#{registration.maintable.submit}"/></td>

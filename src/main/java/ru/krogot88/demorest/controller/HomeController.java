@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.krogot88.demorest.model.Person;
@@ -12,6 +13,7 @@ import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.service.ServicePerson;
 import ru.krogot88.demorest.service.ServiceWord;
 import ru.krogot88.demorest.util.Utils;
+import ru.krogot88.demorest.validator.PersonValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -24,6 +26,9 @@ public class HomeController {
 
     @Autowired
     private ServicePerson servicePerson;
+
+    @Autowired
+    private PersonValidator personValidator;
 
     @GetMapping(value = {"/","/index"})
     public String getIndexPage() {
@@ -52,11 +57,16 @@ public class HomeController {
 
     @GetMapping(value = "/registration")
     public String getRegistrationPage(Model model) {
+        model.addAttribute("personForm",new Person());
         return "registration";
     }
 
     @PostMapping(value = "/registration")
-    public String postRegistrationPage(Person person) {
+    public String postRegistrationPage(@ModelAttribute("personForm") Person person, BindingResult bindingResult) {
+        personValidator.validate(person,bindingResult);
+        if(bindingResult.hasErrors()) {
+            return "registration";
+        }
         System.out.println(person);
         servicePerson.savePerson(person);
         return "redirect:login";
