@@ -1,4 +1,4 @@
-package ru.krogot88.demorest.service;
+package ru.krogot88.demorest.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,6 +7,7 @@ import ru.krogot88.demorest.dao.PersonRepository;
 import ru.krogot88.demorest.dao.RoleRepository;
 import ru.krogot88.demorest.model.Person;
 import ru.krogot88.demorest.model.Role;
+import ru.krogot88.demorest.service.ServicePerson;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Optional;
  * User: Сашок  Date: 17.10.2019 Time: 12:02
  */
 @Service
-public class ServicePersonImpl implements ServicePerson{
+public class ServicePersonImpl implements ServicePerson {
 
     @Autowired
     private PersonRepository personRepository;

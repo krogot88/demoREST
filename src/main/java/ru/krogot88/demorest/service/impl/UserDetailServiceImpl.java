@@ -1,4 +1,4 @@
-package ru.krogot88.demorest.service;
+package ru.krogot88.demorest.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

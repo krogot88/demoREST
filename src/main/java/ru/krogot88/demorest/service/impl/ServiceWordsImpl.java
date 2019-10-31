@@ -1,4 +1,4 @@
-package ru.krogot88.demorest.service;
+package ru.krogot88.demorest.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +11,7 @@ import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Person;
 import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.dto.ResponseWrapper;
+import ru.krogot88.demorest.service.ServiceWord;
 
 import java.security.Principal;
 import java.util.*;

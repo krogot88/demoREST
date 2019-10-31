@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.krogot88.demorest.model.Person;
 import ru.krogot88.demorest.model.Word;
+import ru.krogot88.demorest.service.SecurityService;
 import ru.krogot88.demorest.service.ServicePerson;
 import ru.krogot88.demorest.service.ServiceWord;
 import ru.krogot88.demorest.util.Utils;
@@ -29,6 +30,9 @@ public class HomeController {
 
     @Autowired
     private PersonValidator personValidator;
+
+    @Autowired
+    private SecurityService securityService;
 
     @GetMapping(value = {"/","/index"})
     public String getIndexPage() {
@@ -67,8 +71,8 @@ public class HomeController {
         if(bindingResult.hasErrors()) {
             return "registration";
         }
-        System.out.println(person);
         servicePerson.savePerson(person);
+        securityService.autoLogin(person.getLogin(),person.getPassword());
         return "redirect:login";
     }
 

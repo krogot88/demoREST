@@ -16,6 +16,7 @@ import ru.krogot88.demorest.dao.WordRepository;
 import ru.krogot88.demorest.dto.ResponseWrapper;
 import ru.krogot88.demorest.dto.WordGameDTO;
 import ru.krogot88.demorest.model.Word;
+import ru.krogot88.demorest.service.impl.ServiceWordsImpl;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
