@@ -1,7 +1,11 @@
+var globalWordGameDTOTranslates;
+var isComplicateOn = true;
+
 function myFunction() {
     var translates = document.getElementsByClassName("greeting-content");
-    for(var i = 0; i < translates.length; i++) {
+    for (var i = 0; i < translates.length; i++) {
         setColorNone(translates.item(i).id);
+        document.getElementById(i).setAttribute("onClick","checkAnswer(id)");
     }
 
     $.ajax({
@@ -10,17 +14,34 @@ function myFunction() {
         type: "get",
         contentType: "application/json",
         success: function (data) {
+            globalWordGameDTOTranslates = data.translates;
             $(".greeting-id").text(data.name);
-            $("#translate1").text(data.translates[0]);
-            $("#translate2").text(data.translates[1]);
-            $("#translate3").text(data.translates[2]);
-            $("#translate4").text(data.translates[3]);
+            printTranslates();
         }
     });
 }
 
 function setVisible() {
-    console.log(666);
+    if(isComplicateOn){
+        isComplicateOn = false;
+    } else {
+        isComplicateOn = true;
+    }
+    printTranslates();
+}
+
+function printTranslates() {
+    $("#0").text(gaps(globalWordGameDTOTranslates[0]));
+    $("#1").text(gaps(globalWordGameDTOTranslates[1]));
+    $("#2").text(gaps(globalWordGameDTOTranslates[2]));
+    $("#3").text(gaps(globalWordGameDTOTranslates[3]));
+}
+
+function gaps(translate) {
+    if (isComplicateOn) {
+        return translate.replace(/(.{2})./g, '$1 ');
+    }
+    return translate;
 }
 
 function checkAnswer(id) {
@@ -31,19 +52,25 @@ function checkAnswer(id) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
             "name": $(".greeting-id").text(),
-            "translate": document.getElementById(id).textContent
+            "translate": globalWordGameDTOTranslates[id],
         }),
         success: function (data) {
-            if($(id).text() == data.translate) {
+            var complicatedRealTranslate = gaps(data.translate);
+            document.getElementById(id).textContent = globalWordGameDTOTranslates[id];
+            if (document.getElementById(id).textContent == data.translate) {
                 setGreen(id);
             } else {
                 setRed(id);
                 var translates = document.getElementsByClassName("greeting-content");
-                for(var i = 0; i < translates.length; i++) {
-                    if(translates.item(i).textContent == data.translate) {
+                for (var i = 0; i < translates.length; i++) {
+                    if (document.getElementById(i).textContent == complicatedRealTranslate) {
+                        document.getElementById(i).textContent = globalWordGameDTOTranslates[i];
                         setGreen(translates.item(i).id);
                     }
                 }
+            }
+            for (var i = 0; i < globalWordGameDTOTranslates.length; i++) {
+                document.getElementById(i).setAttribute("onclick", "");
             }
         }
     });
