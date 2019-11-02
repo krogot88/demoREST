@@ -13,6 +13,7 @@ import ru.krogot88.demorest.model.Word;
 import ru.krogot88.demorest.service.SecurityService;
 import ru.krogot88.demorest.service.ServicePerson;
 import ru.krogot88.demorest.service.ServiceWord;
+import ru.krogot88.demorest.util.Translator;
 import ru.krogot88.demorest.util.Utils;
 import ru.krogot88.demorest.validator.PersonValidator;
 
@@ -36,6 +37,12 @@ public class HomeController {
 
     @GetMapping(value = {"/","/index"})
     public String getIndexPage() {
+        Translator translator = new Translator();
+        try {
+            translator.sendGet();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "index";
     }
 
