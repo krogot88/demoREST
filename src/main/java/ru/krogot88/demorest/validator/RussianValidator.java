@@ -14,6 +14,6 @@ public class RussianValidator implements ConstraintValidator<Russian,String> {
     public boolean isValid(String value, ConstraintValidatorContext context) {
         return ((!value.equals(""))
                 && (value != null)
-                && (value.matches("^[а-яА-ЯёЁ ]*$")));
+                && (value.matches("^[а-яА-ЯёЁ ,]*$")));
     }
 }

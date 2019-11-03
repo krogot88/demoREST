@@ -24,6 +24,9 @@ import java.util.*;
 public class HomeController {
 
     @Autowired
+    private Translator translator;
+
+    @Autowired
     private ServiceWord serviceWord;
 
     @Autowired
@@ -37,9 +40,8 @@ public class HomeController {
 
     @GetMapping(value = {"/","/index"})
     public String getIndexPage() {
-        Translator translator = new Translator();
         try {
-            translator.sendGet();
+            //translator.getWordsFromYandex();
         } catch (Exception e) {
             e.printStackTrace();
         }

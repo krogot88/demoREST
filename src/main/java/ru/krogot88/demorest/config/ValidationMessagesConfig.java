@@ -1,5 +1,6 @@
 package ru.krogot88.demorest.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +16,7 @@ public class ValidationMessagesConfig {
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames("classpath:errors","classpath:messages");
+        messageSource.setBasenames("classpath:errors","classpath:messages","classpath:application");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

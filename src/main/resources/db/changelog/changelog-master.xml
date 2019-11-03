@@ -5,7 +5,7 @@
     <changeSet author="krogot88" id="1">
         <sqlFile dbms="postgresql"
                  encoding="utf8"
-                 path="sql/init.sql"
+                 path="sql/init1.sql"
                  relativeToChangelogFile="false"
                  />
     </changeSet>
@@ -13,6 +13,13 @@
         <sqlFile dbms="postgresql"
                  encoding="utf8"
                  path="sql/init2.sql"
+                 relativeToChangelogFile="false"
+        />
+    </changeSet>
+    <changeSet author="krogot88" id="3">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 path="sql/init3.sql"
                  relativeToChangelogFile="false"
         />
     </changeSet>
