@@ -47,7 +47,7 @@
                     </tr>
                     <tr>
                         <td><a href="#" class="knopka" onClick="myFunction();" th:text="#{game.maintable.next}"></a></td>
-                        <td><a href="#" class="knopka" onClick="setVisible();" th:text="#{game.maintable.show.translate}"></a></td>
+                        <td><a href="#" class="knopka" id="complicate-button" onClick="setVisible();" th:text="#{game.maintable.show.translate.full}"></a></td>
                     </tr>
                 </table>
             </div>
@@ -59,4 +59,8 @@
 </body>
 <script th:src="@{/my_scripts.js}"></script>
 <script th:src="@{/jQuery341.js}"></script>
+<script th:inline="javascript">
+    var partlyAnswers = "[(#{game.maintable.show.translate.partly})]";
+    var fullAnswers = "[(#{game.maintable.show.translate.full})]";
+</script>
 </html>

@@ -24,8 +24,10 @@ function myFunction() {
 function setVisible() {
     if(isComplicateOn){
         isComplicateOn = false;
+        document.getElementById("complicate-button").innerHTML = partlyAnswers;
     } else {
         isComplicateOn = true;
+        document.getElementById("complicate-button").innerHTML = fullAnswers;
     }
     printTranslates();
 }
